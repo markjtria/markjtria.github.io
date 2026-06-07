@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mark Justin Tria | Portfolio</title>
+  <link rel="icon" type="img/png" href="assets\MAKU (1).png" />
+
+  <!-- ==============================
+       BOOTSTRAP 5 (for layout & components)
+  =============================== -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <!-- ==============================
+       GOOGLE FONTS
+       - Playfair Display = big headings
+       - DM Sans = body text
+  =============================== -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+
+  <!-- ==============================
+       MY CUSTOM STYLES
+  =============================== -->
+  <style>
+    /* ---- COLLAPSIBLE DESCRIPTION TOGGLE TEXT ---- */
+    .btn-toggle-text.collapsed::before {
+      content: "See More";
+    }
+    .btn-toggle-text:not(.collapsed)::before {
+      content: "See Less";
+    }
+
+    /* ---- COLOR VARIABLES ---- */
+    :root {
+      --dark: #0a0a0a;
+      --light: #f5f5f7;
+      --blue: #3b6fd4;
+      --green: #22c55e;
+      --card-bg: #f0f2f7;
+    }
+
+    /* ---- BASE ---- */
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--light);
+      color: #111;
+      margin: 0;
+    }
+
+    /* ---- HEADINGS use Playfair ---- */
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* =====================
+       NAVBAR — default state (flat, full-width on Home)
+    ===================== */
+    .navbar {
+      background: white;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 14px 32px;
+
+      /* smooth transition when turning into floating pill */
+      transition: all 0.3s ease;
+    }
+
+    /* =====================
+       NAVBAR — floating pill state (added by JavaScript on scroll)
+    ===================== */
+    .navbar.floating {
+      /* shrink to pill shape */
+      border-radius: 50px;
+      border-bottom: none;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+      padding: 10px 28px;
+
+      /* pull it off the top edge and center it */
+      margin: 12px auto;
+      max-width: 820px;
+      left: 0;
+      right: 0;
+    }
+
+    /* Logo text */
+    .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: #111;
+      text-decoration: none;
+    }
+
+    /* Nav links */
+    .nav-link {
+      color: #555 !important;
+      font-size: 0.95rem;
+      padding: 0 14px !important;
+
+      /* smooth color change on hover */
+      transition: color 0.2s ease;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: #111 !important;
+      font-weight: 600;
+    }
+
+    /* "Open to work" green badge */
+    .open-badge {
+      color: var(--green);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .open-badge::before {
+      content: "● ";
+    }
+
+    /* =====================
+       HERO SECTION (Home)
+    ===================== */
+    #home {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, #f5f5f7 60%, #dde8ff 100%);
+      padding: 60px 0;
+    }
+
+    /* Round profile photo */
+    .profile-photo {
+      width: 300px;
+      height: 280px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 5%;
+      border: 4px solid var(--blue);
+    }
+
+    /* "Open to work" pill on photo */
+    .photo-badge {
+      background: white;
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #333;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-top: 12px;
+    }
+
+    /* Social icons row (GH, FB, @) */
+    .social-icons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #e5e5e5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: #333;
+    }
+    .social-icon:hover { background: #ddd; color: #111; }
+
+    /* Tag pill */
+    .tag-pill {
+      border: 1px solid #bbb;
+      border-radius: 30px;
+      padding: 6px 20px;
+      font-size: 0.85rem;
+      color: #555;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+
+    /* Main name */
+    .hero-name {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    /* Italic blue subtitle */
+    .hero-sub {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--blue);
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    /* ---- TYPEWRITER EFFECT ---- */
+
+    /* Wrapper keeps the typed text + cursor inline */
+    .typewriter-wrapper {
+      display: inline;
+      white-space: nowrap;
+    }
+
+    /* The typed word gets a blue underline (like in the video) */
+    #typewriter-text {
+      border-bottom: 2px solid var(--blue);
+      padding-bottom: 1px;
+    }
+
+    /* Blinking cursor — simple | character that fades in and out */
+    .type-cursor {
+      display: inline-block;
+      color: var(--blue);
+      font-style: normal;
+      font-weight: 400;
+      animation: blink 0.7s step-end infinite;
+      margin-left: 1px;
+    }
+
+    /* Blink animation: visible → invisible → repeat */
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
+    /* Blue underline accent */
+    .blue-line {
+      width: 50px;
+      height: 3px;
+      background: var(--blue);
+      margin: 14px 0 20px;
+    }
+
+    /* Buttons */
+    .btn-dark-pill {
+      background: #111;
+      color: white;
+      border-radius: 50px;
+      padding: 14px 30px;
+      font-size: 0.95rem;
+      border: none;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .btn-dark-pill:hover {
+      background: #333;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline-pill {
+      background: transparent;
+      color: #111;
+      border-radius: 50px;
+      padding: 14px 30px;
+      font-size: 0.95rem;
+      border: 1px solid #bbb;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .btn-outline-pill:hover {
+      background: #eee;
+      transform: translateY(-2px);
+    }
+
+    /* =====================
+       SECTION LABEL (e.g. "— SELECTED WORKS")
+    ===================== */
+    .section-label {
+      font-size: 0.75rem;
+      font-family: 'DM Sans', sans-serif;
+      letter-spacing: 3px;
+      color: #888;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .section-label::before {
+      content: "";
+      width: 30px;
+      height: 1px;
+      background: #888;
+    }
+
+    /* =====================
+       WORKS SECTION
+    ===================== */
+    #works {
+      background: var(--light);
+      padding: 80px 0;
+    }
+
+    /* Project card */
+    .project-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      overflow: hidden;
+      height: 100%;
+
+      /* hover animation setup */
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    /* lift card up slightly on hover */
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Top image area of card */
+    .card-img-area {
+      background: #e8ecf4;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+
+    /* Card body */
+    .card-body-custom {
+      padding: 20px;
+    }
+
+    /* Status badge (Live / Completed / In Progress) */
+    .status-badge {
+      border-radius: 30px;
+      padding: 4px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border: 1.5px solid currentColor;
+    }
+    .badge-live    { color: #22c55e; border-color: #22c55e; }
+    .badge-done    { color: #3b6fd4; border-color: #3b6fd4; }
+    .badge-wip     { color: #888;    border-color: #bbb;    }
+
+    /* Tech tag chips */
+    .tech-chip {
+      background: white;
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 0.75rem;
+      color: #444;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin: 2px;
+    }
+
+    /* Colored dot before tech name */
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    /* =====================
+       ABOUT SECTION (dark)
+    ===================== */
+    #about {
+      background: var(--dark);
+      color: white;
+      padding: 80px 0;
+    }
+
+    .about-headline {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.2;
+      color: white;
+    }
+    .about-headline .accent {
+      color: var(--blue);
+      font-style: italic;
+    }
+
+    /* Info grid items */
+    .info-item {
+      border-left: 2px solid #333;
+      padding-left: 14px;
+      margin-bottom: 16px;
+    }
+    .info-label {
+      font-size: 0.75rem;
+      color: #666;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .info-value {
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+    }
+
+    /* About photo placeholder */
+    .about-photo {
+      background: #1a1a1a;
+      border-radius: 16px;
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #444;
+      font-size: 0.9rem;
+    }
+
+    /* =====================
+       SKILLS SECTION
+    ===================== */
+    #skills {
+      background: var(--light);
+      padding: 80px 0;
+    }
+
+    .skill-category-label {
+      font-size: 0.72rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #888;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      margin-top: 30px;
+    }
+    .skill-category-label::before {
+      content: "○";
+    }
+
+    /* Skill card */
+    .skill-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      height: 100%;
+
+      /* hover animation setup */
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .skill-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Icon badge (colored square) */
+    .skill-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    /* Skill % label */
+    .skill-pct {
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    /* Progress bar track */
+    .skill-bar-track {
+      background: #e5e5e5;
+      border-radius: 10px;
+      height: 5px;
+      width: 100%;
+      margin: 8px 0;
+    }
+    /* Progress bar fill */
+    .skill-bar-fill {
+      height: 5px;
+      border-radius: 10px;
+    }
+
+    /* =====================
+       SHARED SECTION HEADING
+       (used by Skills + Works)
+    ===================== */
+    .skills-heading {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #111;
+      margin-bottom: 36px;
+    }
+
+    /* =====================
+       SKILL TILES (new colorful layout)
+    ===================== */
+    .skill-tile {
+      border-radius: 14px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      cursor: default;
+    }
+    .skill-tile:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+    .skill-tile-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .skill-tile-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #222;
+    }
+
+    /* Info block (name + badge + description) */
+    .skill-tile-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    /* e.g. "Advanced", "Intermediate", "Beginner" */
+    .skill-level-badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: white;
+      border-radius: 20px;
+      padding: 2px 10px;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    /* Short description under the skill name */
+    .skill-tile-desc {
+      font-size: 0.8rem;
+      color: #444;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* =====================
+       PROJECT ROWS (side-by-side layout)
+    ===================== */
+    .project-row {
+      padding: 60px 0;
+      border-bottom: 1px solid #e5e5e5;
+    }
+    .project-row:last-child {
+      border-bottom: none;
+    }
+    .project-img-box {
+      border-radius: 16px;
+      overflow: hidden;
+      background: #e8ecf4;
+      aspect-ratio: 16 / 10;
+      position: relative;
+      min-height: 220px;
+    }
+    .project-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+    }
+    .project-img-placeholder {
+      width: 100%;
+      height: 100%;
+      min-height: 220px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-size: 1rem;
+      text-align: center;
+      gap: 8px;
+    }
+    /* Small category label (e.g. "WEB DESIGN") */
+    .project-category-tag {
+      display: inline-block;
+      background: #ffe8d6;
+      color: #c05a1a;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      border-radius: 30px;
+      padding: 5px 14px;
+      margin-bottom: 14px;
+    }
+    .project-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      margin-bottom: 12px;
+      color: #111;
+    }
+    .project-desc {
+      color: #555;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+    }
+    /* Orange demo button */
+    .btn-project-demo {
+      display: inline-block;
+      background: #e8622a;
+      color: white;
+      border-radius: 8px;
+      padding: 12px 28px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 1px;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .btn-project-demo:hover {
+      background: #c94e1c;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* =====================
+       ACHIEVEMENTS SECTION
+    ===================== */
+    #achievements {
+      background: white;
+      padding: 80px 0;
+    }
+
+    /* Timeline entry */
+    .timeline-item {
+      border-left: 3px solid var(--blue);
+      padding-left: 20px;
+      margin-bottom: 30px;
+    }
+    .timeline-year {
+      font-size: 0.8rem;
+      color: #888;
+      margin-bottom: 4px;
+    }
+    .timeline-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 2px;
+    }
+    .timeline-sub {
+      font-size: 0.85rem;
+      color: #666;
+    }
+    .timeline-honor {
+      color: #b45309;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* Esports achievement card */
+    .esports-card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+    .esports-icon { font-size: 1.8rem; }
+    .esports-place {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .esports-event {
+      font-size: 0.8rem;
+      color: #888;
+    }
+    .place-gold   { color: #d97706; }
+    .place-silver { color: #6b7280; }
+    .place-blue   { color: #3b82f6; }
+
+    /* Certification bullet */
+    .cert-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .cert-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+    .cert-title { font-weight: 600; font-size: 0.95rem; }
+    .cert-sub   { font-size: 0.8rem; color: #888; }
+
+    /* =====================
+       CONTACT SECTION (dark)
+    ===================== */
+    #contact {
+      background: var(--dark);
+      color: white;
+      padding: 80px 0;
+    }
+
+    .contact-headline {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      font-style: italic;
+      color: white;
+      margin-bottom: 16px;
+    }
+
+    /* Contact info card (email, github, fb) */
+    .contact-link-card {
+      background: #1a1a1a;
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 10px;
+      text-decoration: none;
+      color: white;
+    }
+    .contact-link-card:hover { background: #222; color: white; }
+    .contact-link-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #2a2a2a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .contact-link-label { font-size: 0.75rem; color: #888; }
+    .contact-link-value { font-size: 0.9rem; font-weight: 600; }
+
+    /* Form fields (dark theme) */
+    .dark-input {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 10px;
+      color: white;
+      padding: 14px 16px;
+      width: 100%;
+      font-size: 0.9rem;
+    }
+    .dark-input::placeholder { color: #555; }
+    .dark-input:focus {
+      outline: none;
+      border-color: #555;
+    }
+
+    label.form-label-dark {
+      font-size: 0.85rem;
+      color: #aaa;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    /* Send button */
+    .btn-send {
+      background: white;
+      color: #111;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 36px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+    .btn-send:hover { background: #ddd; }
+
+    /* =====================
+       FOOTER
+    ===================== */
+    footer {
+      background: #050505;
+      color: #555;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.8rem;
+    }
+
+    /* =====================
+       FLOATING NAVBAR (Works/About/... sections)
+    ===================== */
+    .navbar-float {
+      background: white;
+      border-radius: 50px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 10px 24px;
+      position: sticky;
+      top: 16px;
+      z-index: 100;
+      width: fit-content;
+      margin: 0 auto 40px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- =====================================================================
+       NAVBAR — appears on the HOME section (flat, full-width)
+  ===================================================================== -->
+  <nav class="navbar navbar-expand-lg sticky-top" id="main-navbar">
+    <div class="container">
+
+      <!-- Logo -->
+      <a class="navbar-brand" href="#home"> 
+      <img src="assets\MAKU (1).png" alt="Maku Logo" style="height:45px; margin-left:20px"/>
+      </a>
+
+      <!-- Mobile toggle button -->
+      <button class="navbar-toggler" type="button"
+              data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Nav links -->
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#works">Works</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#achievements">Achievements</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+        <span class="open-badge">Open to work</span>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <!-- =====================================================================
+       SECTION 1 — HOME / HERO
+  ===================================================================== -->
+  <section id="home">
+    <div class="container">
+      <div class="row align-items-center g-5">
+
+        <!-- Left: photo + social links -->
+        <div class="col-lg-4 text-center">
+          <!-- Replace "your-photo.jpg" with your actual photo file -->
+          <img src="assets\makupfp.jpg" alt="Mark Justin Tria"
+               class="profile-photo"
+
+          <-- Open to work badge below photo -->
+          <div class="photo-badge">
+            <span style="color: var(--green);">●</span> Open to work
+          </div>
+
+          <!-- Social links: GH = GitHub, FB = Facebook, @ = Email -->
+          <div class="social-icons justify-content-center">
+            <a href="https://github.com/markjtria" class="social-icon" target="_blank">GH</a>
+            <a href="https://www.facebook.com/mj.tria.146" class="social-icon" target="_blank">FB</a>
+            <a href="mailto:justinmark648@gmail.com" class="social-icon" target="_blank">@</a>
+          </div>
+        </div>
+
+        <!-- Right: text content -->
+        <div class="col-lg-7">
+          <!-- School tag -->
+          <div class="tag-pill">BSIT · PUP STO. TOMAS · 2026</div>
+
+          <!-- Name -->
+          <h1 class="hero-name">Mark Justin Tria</h1>
+
+          <!-- Subtitle with typewriter effect -->
+          <!-- The words inside the span cycle automatically via JavaScript below -->
+          <p class="hero-sub">
+            aka Maku —
+            <span class="typewriter-wrapper">
+              <span id="typewriter-text"></span><span class="type-cursor">|</span>
+            </span>
+          </p>
+
+          <!-- Short bio -->
+          <p style="color: #444; line-height: 1.8; max-width: 550px;">
+            Hi! I'm a 2nd-year IT student who loves to learn and explore the world of web 
+            development. Outside of school, I enjoy playing online games — and travelling.
+          </p>
+
+          <!-- Call to action buttons -->
+          <div class="d-flex gap-3 flex-wrap mt-4">
+            <a href="#works" class="btn-dark-pill">View my work →</a>
+            <a href="#contact" class="btn-outline-pill">Contact me</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       SECTION 2 — WORKS / PROJECTS 
+       Each project: image on LEFT, description on RIGHT
+  ===================================================================== -->
+  <section id="works">
+    <div class="container">
+
+      <h2 class="skills-heading">LATEST PROJECTS</h2>
+
+      <div class="project-row">
+        <div class="row align-items-center g-5">
+
+          <div class="col-lg-6">
+            <div class="project-img-box">
+              <img src="assets\personalwork.png" alt="Personal Portfolio"
+                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <span class="project-category-tag">BOOTSTRAP + FIGMA</span>
+            <h3 class="project-title">Personal Portfolio</h3>
+            <p class="project-desc mb-2">
+              Designed and built this portfolio using Bootstrap and Figma to showcase works and developer skills.
+            </p>
+
+            <div class="collapse" id="desc-portfolio">
+              <p class="project-desc small text-secondary mt-0 mb-3">
+                In this personal portfolio, this highlights my background, development skills, recent coding projects, and academic achievements altogether in one clean space.
+              </p>
+            </div>
+
+            <button class="btn btn-sm btn-outline-dark mb-4 py-1 px-3 rounded-pill btn-toggle-text collapsed" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#desc-portfolio" 
+                    aria-expanded="false" 
+                    aria-controls="desc-portfolio"></button>
+
+            <div class="d-flex gap-2 flex-wrap mb-4">
+              <span class="tech-chip"><span class="dot" style="background:#7c3aed;"></span>Bootstrap</span>
+              <span class="tech-chip"><span class="dot" style="background:#ef4444;"></span>Figma</span>
+              <span class="tech-chip"><span class="dot" style="background:#f97316;"></span>HTML5</span>
+              <span class="tech-chip"><span class="dot" style="background:#eab308;"></span>JavaScript</span>
+              <span class="tech-chip"><span class="dot" style="background:#3b82f6;"></span>CSS3</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="project-row">
+        <div class="row align-items-center g-5 flex-lg-row-reverse">
+
+          <div class="col-lg-6">
+            <div class="project-img-box">
+              <img src="assets\bunny hop.png" alt="Bunny Hop"
+                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <span class="project-category-tag">PYTHON GAME</span>
+            <h3 class="project-title">Bunny Hop</h3>
+            <p class="project-desc mb-2">
+              A retro-inspired, 2D pixel arcade game where the goal is to guide a jumping bunny up a series of moving platforms.
+            </p>
+
+            <div class="collapse" id="desc-bunnyhop">
+              <p class="project-desc small text-secondary mt-0 mb-3">
+                Players must time their jumps perfectly, dodge obstacles, and collect carrots to beat their high score. The game uses custom code to handle things like gravity, platform landings, and keeping track of the current score in real-time.
+              </p>
+            </div>
+
+            <button class="btn btn-sm btn-outline-dark mb-4 py-1 px-3 rounded-pill btn-toggle-text collapsed" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#desc-bunnyhop" 
+                    aria-expanded="false" 
+                    aria-controls="desc-bunnyhop"></button>
+
+            <div class="d-flex gap-2 flex-wrap mb-4">
+              <span class="tech-chip"><span class="dot" style="background:#3b82f6;"></span>Python</span>
+              <span class="tech-chip"><span class="dot" style="background:#22c55e;"></span>Pygame</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="project-row">
+        <div class="row align-items-center g-5">
+
+          <div class="col-lg-6">
+            <div class="project-img-box">
+              <img src="assets\ecommercewebsite.png" alt="E-Commerce Website"
+                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="col-lg-12 px-0">
+              <span class="project-category-tag">PHP + MYSQL BACKEND</span>
+              <h3 class="project-title">E-Commerce Website</h3>
+            </div>
+            <p class="project-desc mb-2">
+              A fully functional, high-energy e-commerce storefront designed specifically for gaming gear and peripherals.
+            </p>
+
+            <div class="collapse" id="desc-ecommerce">
+              <p class="project-desc small text-secondary mt-0 mb-3">
+                The setup includes user account creation, a dark interface for catalog browsing, and a working checkout setup. It connects a frontend layout directly to a database, using PHP sessions to save what users add to their shopping carts.
+              </p>
+            </div>
+
+            <button class="btn btn-sm btn-outline-dark mb-4 py-1 px-3 rounded-pill btn-toggle-text collapsed" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#desc-ecommerce" 
+                    aria-expanded="false" 
+                    aria-controls="desc-ecommerce"></button>
+
+            <div class="d-flex gap-2 flex-wrap mb-4">
+              <span class="tech-chip"><span class="dot" style="background:#7c3aed;"></span>PHP</span>
+              <span class="tech-chip"><span class="dot" style="background:#22c55e;"></span>MySQL</span>
+              <span class="tech-chip"><span class="dot" style="background:#f97316;"></span>HTML5</span>
+              <span class="tech-chip"><span class="dot" style="background:#eab308;"></span>JavaScript</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="project-row">
+        <div class="row align-items-center g-5 flex-lg-row-reverse">
+
+          <div class="col-lg-6">
+            <div class="project-img-box">
+              <img src="assets\pinoytixx.png" alt="PinoyTix"
+                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <span class="project-category-tag">TICKET RESERVATION PLATFORM</span>
+            <h3 class="project-title">PinoyTix</h3>
+            <p class="project-desc mb-2">
+              A ticket reservation platform made for the latest movies.
+            </p>
+
+            <div class="collapse" id="desc-pinoytix">
+              <p class="project-desc small text-secondary mt-0 mb-3">
+                It lets users browse event timings and select specific seats on an interactive map. By using JavaScript behind the scenes to grab data from the backend database, seat availability updates instantly.
+            </div>
+
+            <button class="btn btn-sm btn-outline-dark mb-4 py-1 px-3 rounded-pill btn-toggle-text collapsed" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#desc-pinoytix" 
+                    aria-expanded="false" 
+                    aria-controls="desc-pinoytix"></button>
+
+            <div class="pt-1 mb-4">
+              <div class="d-flex gap-2 flex-wrap d-inline-block float-start me-3">
+                <span class="tech-chip"><span class="dot" style="background:#7c3aed;"></span>PHP</span>
+                <span class="tech-chip"><span class="dot" style="background:#333;"></span>REST API</span>
+                <span class="tech-chip"><span class="dot" style="background:#22c55e;"></span>MySQL</span>
+                <span class="tech-chip"><span class="dot" style="background:#eab308;"></span>JavaScript</span>
+              </div>
+              <span class="status-badge badge-wip d-inline-block mt-1">In Progress</span>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- =====================================================================
+       SECTION 3 — ABOUT ME 
+  ===================================================================== -->
+  <section id="about">
+    <div class="container">
+
+      <p class="section-label" style="color:#666;">ABOUT ME</p>
+
+      <div class="row g-5 align-items-start">
+
+        <!-- Left: big headline + photo -->
+        <div class="col-lg-5">
+          <h2 class="about-headline">
+            Still
+            <span class="accent">learning,</span>
+            always
+            <span class="accent">building.</span>
+          </h2>
+
+          <div class="about-photo mt-4">
+            <img src="assets\ablaze.jpg" alt="Mark Justin Tria" style="width:100%; height:100%; object-fit:contain; border-radius:8px;"/>
+          </div>
+        </div>
+
+        <!-- Right: bio + info grid -->
+        <div class="col-lg-6 offset-lg-1">
+          <p style="color:#bbb; line-height:1.8; margin-bottom:24px;">
+            I'm <strong style="color:white;">Mark Justin Tria</strong> — also known as
+            <strong style="color:var(--blue);">Maku</strong>. I'm a 2nd-year BSIT student at
+            <strong style="color:white;">Polytechnic University of the Philippines – Sto. Tomas</strong>.
+          </p>
+          <p style="color:#bbb; line-height:1.8; margin-bottom:32px;">
+            Outside of school, I love playing online games (especially Mobile Legends)
+            and travelling with my beloved companions. The strategy, discipline, and
+            teamwork from gaming shapes how I approach development.
+          </p>
+
+          <!-- Info grid: 2 columns -->
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="info-item">
+                <p class="info-label">Year</p>
+                <p class="info-value">2nd Year (2024–Present)</p>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="info-item">
+                <p class="info-label">School</p>
+                <p class="info-value">PUP – Sto. Tomas</p>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="info-item">
+                <p class="info-label">Status</p>
+                <p class="info-value">Open for Opportunities</p>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="info-item">
+                <p class="info-label">Based in</p>
+                <p class="info-value">Philippines 🇵🇭</p>
+              </div>
+            </div>
+            </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================================
+       SECTION 4 — SKILLS 
+  ===================================================================== -->
+  <section id="skills">
+    <div class="container">
+
+      <h2 class="skills-heading">MY SKILLS</h2>
+
+      <!-- Skills grid — 2 tiles per row on desktop -->
+      <div class="row g-3">
+
+        <!-- HTML5 — teal -->
+        <div class="col-md-6">
+          <div class="skill-tile" style="background: #b2e0d8;">
+            <div class="skill-tile-icon" style="background: #5bbfad; color: white;">5</div>
+            <div class="skill-tile-info">
+              <div class="d-flex align-items-center gap-2">
+                <span class="skill-tile-name">HTML5</span>
+                <span class="skill-level-badge" style="background:#5bbfad;">Beginner</span>
+              </div>
+              <p class="skill-tile-desc">I'm learning how to structure web pages using basic HTML tags and elements.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CSS3 — orange/yellow -->
+        <div class="col-md-6">
+          <div class="skill-tile" style="background: #f9d77e;">
+            <div class="skill-tile-icon" style="background: #e6b800; color: white;">3</div>
+            <div class="skill-tile-info">
+              <div class="d-flex align-items-center gap-2">
+                <span class="skill-tile-name">CSS3</span>
+                <span class="skill-level-badge" style="background:#e6b800;">Beginner</span>
+              </div>
+              <p class="skill-tile-desc">I can style basic web pages with colors, fonts, and simple layouts.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- JavaScript — pink/salmon -->
+        <div class="col-md-6">
+          <div class="skill-tile" style="background: #f5b8a0;">
+            <div class="skill-tile-icon" style="background: #e07850; color: white;">JS</div>
+            <div class="skill-tile-info">
+              <div class="d-flex align-items-center gap-2">
+                <span class="skill-tile-name">JavaScript</span>
+                <span class="skill-level-badge" style="background:#e07850;">Beginner</span>
+              </div>
+              <p class="skill-tile-desc">I'm starting to learn and explore how to add simple yet useful interactivity to web pages.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bootstrap — periwinkle blue -->
+        <div class="col-md-6">
+          <div class="skill-tile" style="background: #bdb8f0;">
+            <div class="skill-tile-icon" style="background: #7c77dd; color: white;">B</div>
+            <div class="skill-tile-info">
+              <div class="d-flex align-items-center gap-2">
+                <span class="skill-tile-name">Bootstrap</span>
+                <span class="skill-level-badge" style="background:#7c77dd;">Beginner</span>
+              </div>
+              <p class="skill-tile-desc">My go-to framework — I use it daily for layouts, components, and responsive design.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- PHP — light green -->
+        <div class="col-md-6">
+          <div class="skill-tile" style="background: #b8dba8;">
+            <div class="skill-tile-icon" style="background: #6aaa55; color: white;">php</div>
+            <div class="skill-tile-info">
+              <div class="d-flex align-items-center gap-2">
+                <span class="skill-tile-name">PHP</span>
+                <span class="skill-level-badge" style="background:#6aaa55;">Beginner</span>
+              </div>
+              <p class="skill-tile-desc">I can write basic PHP scripts for simple backend tasks and form handling.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- MySQL — light blue -->
+        <div class="col-md-6">
+          <div class="skill-tile" style="background: #a8cfe0;">
+            <div class="skill-tile-icon" style="background: #4a9dbc; color: white;">SQL</div>
+            <div class="skill-tile-info">
+              <div class="d-flex align-items-center gap-2">
+                <span class="skill-tile-name">MySQL</span>
+                <span class="skill-level-badge" style="background:#4a9dbc;">Beginner</span>
+              </div>
+              <p class="skill-tile-desc">I know how to create tables and run simple queries to store and retrieve data.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Python — lavender -->
+        <div class="col-md-6">
+          <div class="skill-tile" style="background: #d5b8f0;">
+            <div class="skill-tile-icon" style="background: #9a6dd7; color: white;">Py</div>
+            <div class="skill-tile-info">
+              <div class="d-flex align-items-center gap-2">
+                <span class="skill-tile-name">Python</span>
+                <span class="skill-level-badge" style="background:#9a6dd7;">Beginner</span>
+              </div>
+              <p class="skill-tile-desc">I've used Python for basic scripting and a simple game project with Pygame.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Figma — peach -->
+        <div class="col-md-6">
+          <div class="skill-tile" style="background: #f0c4a8;">
+            <div class="skill-tile-icon" style="background: #d47840; color: white;">Fig</div>
+            <div class="skill-tile-info">
+              <div class="d-flex align-items-center gap-2">
+                <span class="skill-tile-name">Figma</span>
+                <span class="skill-level-badge" style="background:#d47840;">Beginner</span>
+              </div>
+              <p class="skill-tile-desc">I design simple UI/UX wireframes, and prototypes.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Git — red/coral -->
+        <div class="col-md-6">
+          <div class="skill-tile" style="background: #f5a8a8;">
+            <div class="skill-tile-icon" style="background: #d94f4f; color: white;">Git</div>
+            <div class="skill-tile-info">
+              <div class="d-flex align-items-center gap-2">
+                <span class="skill-tile-name">Git</span>
+                <span class="skill-level-badge" style="background:#d94f4f;">Beginner</span>
+              </div>
+              <p class="skill-tile-desc">I use Git to save and track my code changes and push projects to GitHub.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================================
+       SECTION 5 — ACHIEVEMENTS
+  ===================================================================== -->
+  <section id="achievements">
+    <div class="container">
+
+      <p class="section-label">EDUCATION & ACHIEVEMENTS</p>
+
+      <div class="row g-5">
+
+        <!-- Left: Education timeline -->
+        <div class="col-lg-5">
+          <h3 style="font-weight:900; margin-bottom:32px;">Education</h3>
+
+          <!-- Entry 1 -->
+          <div class="timeline-item">
+            <p class="timeline-year">2024 – Present</p>
+            <p class="timeline-title">BS Information Technology</p>
+            <p class="timeline-sub">Polytechnic University of the Philippines – Sto. Tomas</p>
+          </div>
+
+          <!-- Entry 2 -->
+          <div class="timeline-item">
+            <p class="timeline-year">2022 – 2024</p>
+            <p class="timeline-title">Senior High School — STEM Strand</p>
+            <p class="timeline-sub">Tanauan Institute</p>
+            <p class="timeline-honor">With Honors 🏅</p>
+          </div>
+        </div>
+
+        <!-- Right: Esports + Certifications -->
+        <div class="col-lg-6 offset-lg-1">
+
+          <h3 style="font-weight:900; margin-bottom:24px;">Esports</h3>
+
+          <!-- Champion -->
+          <div class="esports-card">
+            <span class="esports-icon">🏆</span>
+            <div>
+              <p class="esports-place place-gold">Champion</p>
+              <p class="esports-event">MSL</p>
+            </div>
+          </div>
+
+          <!-- 2nd Place -->
+          <div class="esports-card">
+            <span class="esports-icon">🥈</span>
+            <div>
+              <p class="esports-place place-silver">2nd Place</p>
+              <p class="esports-event">MLBB Boys</p>
+            </div>
+          </div>
+
+          <!-- 6th Place -->
+          <div class="esports-card">
+            <span class="esports-icon">🏅</span>
+            <div>
+              <p class="esports-place place-blue">6th Place</p>
+              <p class="esports-event">PCC</p>
+            </div>
+          </div>
+
+          <!-- Certifications -->
+          <h3 style="font-weight:900; margin-top:36px; margin-bottom:20px;">Certifications</h3>
+
+          <div class="cert-item">
+            <span class="cert-dot" style="background:#111;"></span>
+            <div>
+              <p class="cert-title">Currently building my portfolio</p>
+              <p class="cert-sub">Active — 2025</p>
+            </div>
+          </div>
+
+          <div class="cert-item">
+            <span class="cert-dot" style="background:var(--green);"></span>
+            <div>
+              <p class="cert-title">Open for Opportunities</p>
+              <p class="cert-sub">Internships & collabs</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================================
+       SECTION 6 — CONTACT 
+  ===================================================================== -->
+  <section id="contact">
+    <div class="container">
+
+      <p class="section-label" style="color:#555;">GET IN TOUCH</p>
+
+      <div class="row g-5 align-items-start">
+
+        <!-- Left: headline + contact links -->
+        <div class="col-lg-5">
+          <h2 class="contact-headline">Let's work together.</h2>
+          <p style="color:#888; margin-bottom:32px;">
+            Have a project idea, want to collaborate, or just say hi? I'd love to hear from you.
+          </p>
+
+          <!-- Email -->
+          <a href="mailto:justinmark648@gmail.com" class="contact-link-card">
+            <div class="contact-link-icon">@</div>
+            <div>
+              <p class="contact-link-label">Email</p>
+              <p class="contact-link-value">justinmark648@gmail.com</p>
+            </div>
+          </a>
+
+          <!-- GitHub -->
+          <a href="https://github.com/markjtria" target="_blank" class="contact-link-card">
+            <div class="contact-link-icon">GH</div>
+            <div>
+              <p class="contact-link-label">GitHub</p>
+              <p class="contact-link-value">github.com/Maku</p>
+            </div>
+          </a>
+
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/mj.tria.146" class="contact-link-card">
+            <div class="contact-link-icon">F</div>
+            <div>
+              <p class="contact-link-label">Facebook</p>
+              <p class="contact-link-value">Mark Justin Tria</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Right: contact form -->
+        <div class="col-lg-6 offset-lg-1">
+
+          <div class="row g-3 mb-3">
+            <!-- Name field -->
+            <div class="col-md-6">
+              <label class="form-label-dark">Name</label>
+              <input type="text" class="dark-input" placeholder="Your name" />
+            </div>
+            <!-- Email field -->
+            <div class="col-md-6">
+              <label class="form-label-dark">Email</label>
+              <input type="email" class="dark-input" placeholder="your@email.com" />
+            </div>
+          </div>
+
+          <!-- Message field -->
+          <div class="mb-3">
+            <label class="form-label-dark">Message</label>
+            <textarea class="dark-input" rows="6"
+                      placeholder="Hi Maku, I'd love to..."></textarea>
+          </div>
+
+          <!-- Submit button -->
+          <button class="btn-send">Send message →</button>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================================
+       FOOTER
+  ===================================================================== -->
+  <footer>
+    <p>© 2025 Mark Justin Tria · Built with Bootstrap 5</p>
+  </footer>
+
+
+  <!-- ==============================
+       BOOTSTRAP JS (needed for mobile menu toggle)
+  =============================== -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ==============================
+       TYPEWRITER SCRIPT
+       Cycles through a list of words,
+       types them letter by letter,
+       then deletes them — then repeats.
+  =============================== -->
+  <script>
+    // ---- The words to cycle through ----
+    const words = [
+      "Future Frontend Developer",
+      "Future Pro Player",
+      "Web Developer",
+      "UI/UX Designer",
+      "BSIT Student"
+    ];
+
+    // ---- Settings (in milliseconds) ----
+    const typeSpeed   = 80;   // how fast each letter appears
+    const deleteSpeed = 40;   // how fast each letter disappears
+    const pauseAfter  = 1800; // how long to wait after fully typed
+    const pauseBefore = 400;  // how long to wait before typing next word
+
+    // ---- Internal state ----
+    let wordIndex   = 0;  // which word we're on
+    let charIndex   = 0;  // how many characters typed so far
+    let isDeleting  = false;
+
+    // Grab the element where text appears
+    const el = document.getElementById('typewriter-text');
+
+    function type() {
+      const currentWord = words[wordIndex];
+
+      if (!isDeleting) {
+        // --- TYPING: add one character ---
+        charIndex++;
+        el.textContent = currentWord.slice(0, charIndex);
+
+        if (charIndex === currentWord.length) {
+          // Fully typed → pause, then start deleting
+          isDeleting = true;
+          setTimeout(type, pauseAfter);
+          return;
+        }
+        setTimeout(type, typeSpeed);
+
+      } else {
+        // --- DELETING: remove one character ---
+        charIndex--;
+        el.textContent = currentWord.slice(0, charIndex);
+
+        if (charIndex === 0) {
+          // Fully deleted → move to next word
+          isDeleting = false;
+          wordIndex  = (wordIndex + 1) % words.length;
+          setTimeout(type, pauseBefore);
+          return;
+        }
+        setTimeout(type, deleteSpeed);
+      }
+    }
+
+    // Start the typewriter when the page loads
+    type();
+  </script>
+  
+
+  <!-- ==============================
+       SCROLL SCRIPT
+       Watches how far down you scrolled.
+       When you pass the Home section,
+       it adds "floating" class to the navbar
+       which makes it turn into a pill shape.
+  =============================== -->
+  <script>
+    // Grab the navbar by its ID
+    const navbar = document.getElementById('main-navbar');
+
+    // Grab the home section so we know when it ends
+    const homeSection = document.getElementById('home');
+
+    // Run this every time the user scrolls
+    window.addEventListener('scroll', function () {
+
+      // scrollY = how many pixels from the top the user has scrolled
+      const scrolled = window.scrollY;
+
+      // offsetHeight = how tall the home section is in pixels
+      const homeBottom = homeSection.offsetHeight;
+
+      // If we scrolled past home → pill shape ON
+      // If we're back at top → pill shape OFF
+      if (scrolled > homeBottom - 80) {
+        navbar.classList.add('floating');
+      } else {
+        navbar.classList.remove('floating');
+      }
+    });
+  </script>
+
+</body>
+</html>
