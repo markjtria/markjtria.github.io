@@ -211,6 +211,7 @@
       width: 160px;
       height: 160px;
       object-fit: cover;
+      object-position: center top;
       border: 1px solid var(--v-red);
       padding: 4px;
     }
@@ -668,12 +669,12 @@
 <body>
 
   <section id="hero-lobby" class="view-section active">
-    <p class="lobby-mode-label">// SYSTEM ACCESS · MAIN PORTFOLIO</p>
+    <p class="lobby-mode-label">// PERSONAL · PORTFOLIO</p>
 
     <div class="hero-banner-card v-bracket-card">
       <img src="assets/makupfp.jpg" alt="Maku" class="hero-banner-photo" />
       <p class="hero-banner-name">MAKU</p>
-      <p class="hero-banner-role">IT Student</p>
+      <p class="hero-banner-role">IT STUDENT</p>
     </div>
 
     <button class="btn-v-action" id="enterBtn">ENTER</button>
@@ -684,7 +685,7 @@
       
       <div class="row align-items-center g-4 profile-section-wrapper">
         <div class="col-md-3 text-center text-md-start">
-          <img src="assets/makupfp.jpg" alt="Mark Justin Tria" class="profile-frame" onerror="this.src='https://via.placeholder.com/180'"/>
+          <img src="assets/makuformal.png" alt="Mark Justin Tria" class="profile-frame"/>
         </div>
         <div class="col-md-9 text-center text-md-start">
           <h1 class="hub-name">Mark Justin Tria</h1>
@@ -755,19 +756,18 @@
           <div class="col-md-6">
             <p class="section-eyebrow">// Currently Working On</p>
             <ul class="clean-bullet-list">
-              <li>Improving Frontend Development</li>
-              <li>Learning Modern React Workflows</li>
-              <li>Building Better UI/UX Designs</li>
-              <li>Strengthening Backend Development Skills</li>
+              <li>Improving my Frontend Development</li>
+              <li>Learning more About Coding</li>
+              <li>Building better UI/UX Designs</li>
             </ul>
           </div>
           <div class="col-md-6">
             <p class="section-eyebrow">// Outside Coding</p>
             <ul class="clean-bullet-list">
-              <li>Playing Valorant</li>
-              <li>Playing League of Legends</li>
-              <li>Learning UI Design</li>
-              <li>Following Esports</li>
+              <li>Playing Online Games</li>
+              <li> Traveling and Exploring New Places</li>
+              <li>Learning UI/ UX Design</li>
+              <li>Following and Pursuing Esports</li>
             </ul>
           </div>
         </div>
@@ -775,19 +775,19 @@
 
       <div class="hub-nav-grid">
         <div class="row g-2 mb-2">
-          <div class="col-4">
+          <div class="col-6 col-md-4">
             <button class="btn-hub-nav" onclick="navigateToSection('night-market')">
-              <span>Projects Hub</span> <span class="nav-arrow">→</span>
+              <span>Projects</span> <span class="nav-arrow">→</span>
             </button>
           </div>
-          <div class="col-4">
+          <div class="col-6 col-md-4">
             <button class="btn-hub-nav" onclick="openPanel('panel-education')">
               <span>Education</span> <span class="nav-arrow">→</span>
             </button>
           </div>
-          <div class="col-4">
+          <div class="col-12 col-md-4">
             <button class="btn-hub-nav" onclick="openPanel('panel-esports')">
-              <span>Combat Record</span> <span class="nav-arrow">→</span>
+              <span>Achievements</span> <span class="nav-arrow">→</span>
             </button>
           </div>
         </div>
@@ -804,20 +804,150 @@
       </div>
 
     </div>
+
+  <div id="panel-esports" class="info-panel">
+    <div class="panel-content v-bracket-card">
+      <div class="panel-back-row">
+        <button class="panel-back-btn" onclick="closePanel('panel-esports')"><i class="bi bi-arrow-left"></i> Close Panel</button>
+        <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-esports')">Return to About Me</button>
+      </div>
+      <div class="scrollable-panel-body">
+        <div class="panel-header-block">
+          <span class="panel-tag">COMPETITIVE LOGS</span>
+          <span class="panel-status-badge">Esports Bracket</span>
+        </div>
+        <h2 class="text-white mb-4">ESPORTS</h2>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <div class="v-bracket-card" style="height: 100%; display: flex; flex-direction: column;">
+              <div style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
+                <img src="assets/MSL CHAMP.jpg" alt="MSL Champion" style="max-width: 100%; max-height: 100%; object-fit: cover;">
+              </div>
+              <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column;">
+                <span style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Achievement #01</span>
+                <h4 style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">Champion</h4>
+                <p style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">MSL Regional Match Bracket</p>
+                <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">Won the regional tournament through teamwork, communication, and consistent performance throughout the competition.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="v-bracket-card" style="height: 100%; display: flex; flex-direction: column;">
+              <div style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
+                <img src="assets/PCC.jpg" alt="PCC 6th Place" style="max-width: 100%; max-height: 100%; object-fit: cover;">
+              </div>
+              <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column;">
+                <span style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Achievement #02</span>
+                <h4 style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">6th Place</h4>
+                <p style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">PCC Tournament</p>
+                <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">Finished in the Top 6 among multiple competing teams in a highly competitive tournament.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="v-bracket-card" style="height: 100%; display: flex; flex-direction: column;">
+              <div style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
+                <img src="assets/2nd Place.jpg" alt="2nd Place" style="max-width: 100%; max-height: 100%; object-fit: cover;">
+              </div>
+              <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column;">
+                <span style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Achievement #03</span>
+                <h4 style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">2nd Place</h4>
+                <p style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">MLBB Campus Tournament</p>
+                <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">Reached the finals and secured 2nd place after competing against strong teams from the campus.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="panel-education" class="info-panel">
+    <div class="panel-content v-bracket-card">
+      <div class="panel-back-row">
+        <button class="panel-back-btn" onclick="closePanel('panel-education')"><i class="bi bi-arrow-left"></i> Close Panel</button>
+        <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-education')">Return to About Me</button>
+      </div>
+      <div class="scrollable-panel-body">
+        <div class="row g-4">
+          <div class="col-12">
+            <h4 class="text-white mb-1">Academic Roadmap</h4>
+            <p class="text-white small mb-3" style="font-size: 0.85rem;">BS Information Technology — 2024 – Present</p>
+            <div class="vertical-timeline">
+              <div class="timeline-node">
+                <p class="timeline-year">2024-ONGOING</p>
+                <p class="timeline-text">PUP STO TOMAS CAMPUS - BS Information Technology</p>
+              </div>
+              <div class="timeline-node">
+                <p class="timeline-year">2022-2024</p>
+                <p class="timeline-text">TANAUAN INSTITUTE (STEM STRAND)</p>
+              </div>
+              <div class="timeline-node">
+                <p class="timeline-year">2018-2022</p>
+                <p class="timeline-text">RAMON MAGSAYSAY HIGHSCHOOL - TANAUAN CITY INTEGRATED HIGHSCHOOL</p>
+              </div>
+              <div class="timeline-node">
+                <p class="timeline-year">2012-2018</p>
+                <p class="timeline-text">LEGARDA ELEMENTARY SCHOOL</p>
+              </div>
+            </div>
+            <div class="mt-4">
+              <p class="text-white font-weight-bold mb-2 v-font" style="font-size: 0.95rem;">Currently Exploring</p>
+              <ul class="clean-bullet-list">
+                <li>Bootstrap</li>
+                <li>UI/UX Design</li>
+                <li>Frontend/Backend Development</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="panel-contact" class="info-panel">
+    <div class="panel-content v-bracket-card">
+      <div class="panel-back-row">
+        <button class="panel-back-btn" onclick="closePanel('panel-contact')"><i class="bi bi-arrow-left"></i> Close Panel</button>
+        <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-contact')">Return to About Me</button>
+      </div>
+      <h3 class="text-white mb-4">Contact Gateway</h3>
+      <div class="scrollable-panel-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="small text-white mb-1">Name</label>
+            <input type="text" id="contact-name" class="dark-input" placeholder="Your name" />
+          </div>
+          <div class="col-md-6">
+            <label class="small text-white mb-1">Email</label>
+            <input type="email" id="contact-email" class="dark-input" placeholder="your@email.com" />
+          </div>
+          <div class="col-12">
+            <label class="small text-white mb-1">Message</label>
+            <textarea id="contact-message" class="dark-input" rows="4" placeholder="Type parameters..."></textarea>
+          </div>
+          <div class="col-12 text-end">
+            <button class="btn-send" onclick="sendMessage()">Send Message</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   </section>
 
   <section id="night-market" class="view-section">
     <div class="container" style="max-width: 1000px;">
       
       <div class="nm-header">
-        <p class="nm-eyebrow">// NIGHT MARKET — SELECTED PROJECTS</p>
+        <p class="nm-eyebrow">// LATEST PROJECTS</p>
         <button class="btn-return-hub" onclick="navigateToSection('about-me-hub')">Return to About Me</button>
       </div>
 
       <div class="row g-3">
         <div class="col-12 col-sm-6 col-md-3">
           <div class="nm-card v-bracket-card" onclick="openPanel('panel-pinoytix')">
-            <span class="nm-card-featured-badge">Featured</span>
+            <span class="nm-card-featured-badge">ONGOING</span>
             <div class="nm-card-preview" style="background-image: url('assets/pinoytixx.png')"></div>
             <div class="nm-card-body">
               <span class="nm-card-offer">PROJECT #01</span>
@@ -892,7 +1022,6 @@
           <ul class="role-list">
             <li>UI Design</li>
             <li>Frontend Development</li>
-            <li>Backend Development</li>
             <li>Database Design</li>
           </ul>
         </div>
@@ -969,9 +1098,8 @@
           <p class="role-title">// My Role</p>
           <ul class="role-list">
             <li>UI Design</li>
-            <li>Frontend Development</li>
-            <li>Backend Engineering</li>
-            <li>Database Architecture</li>
+            <li>Frontend and Backend Development</li>
+            <li>Database</li>
           </ul>
         </div>
 
@@ -1018,147 +1146,6 @@
           <span class="tech-chip"><span class="dot"></span>Bootstrap</span>
           <span class="tech-chip"><span class="dot"></span>Figma Specs</span>
           <span class="tech-chip"><span class="dot"></span>HTML5</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="panel-esports" class="info-panel">
-    <div class="panel-content v-bracket-card">
-      <div class="panel-back-row">
-        <button class="panel-back-btn" onclick="closePanel('panel-esports')"><i class="bi bi-arrow-left"></i> Close Panel</button>
-        <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-esports')">Return to About Me</button>
-      </div>
-      <div class="scrollable-panel-body">
-        <div class="panel-header-block">
-          <span class="panel-tag">COMPETITIVE LOGS</span>
-          <span class="panel-status-badge">Esports Bracket</span>
-        </div>
-        <h2 class="text-white mb-4">COMBAT RECORD</h2>
-        
-        <div class="row g-3">
-          <div class="col-md-4">
-            <div class="v-bracket-card" style="height: 100%; display: flex; flex-direction: column;">
-              <div style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
-                <i class="bi bi-trophy" style="font-size: 2.5rem; color: var(--v-red);"></i>
-              </div>
-              <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column;">
-                <span style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Achievement #01</span>
-                <h4 style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">Champion</h4>
-                <p style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">MSL Regional Match Bracket</p>
-                <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">Dominated the regional division standings through high-tier tactical processing and advanced squad coordination paradigms.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="v-bracket-card" style="height: 100%; display: flex; flex-direction: column;">
-              <div style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
-                <i class="bi bi-shield-shaded" style="font-size: 2.5rem; color: var(--v-text-mut);"></i>
-              </div>
-              <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column;">
-                <span style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Achievement #02</span>
-                <h4 style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">6th Place</h4>
-                <p style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">PCC Tournament</p>
-                <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">Secured a top leaderboard segment position among elite competing formations in a high-stakes competitive field matrix.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="v-bracket-card" style="height: 100%; display: flex; flex-direction: column;">
-              <div style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
-                <i class="bi bi-award" style="font-size: 2.5rem; color: var(--v-red);"></i>
-              </div>
-              <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column;">
-                <span style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Achievement #03</span>
-                <h4 style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">2nd Place</h4>
-                <p style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">MLBB Campus Tournament</p>
-                <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">Achieved grand finalist status, performing under high-tier operational limits across standard competitive game sequences.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <div id="panel-education" class="info-panel">
-    <div class="panel-content v-bracket-card">
-      <div class="panel-back-row">
-        <button class="panel-back-btn" onclick="closePanel('panel-education')"><i class="bi bi-arrow-left"></i> Close Panel</button>
-        <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-education')">Return to About Me</button>
-      </div>
-      <div class="scrollable-panel-body">
-        <div class="row g-4">
-          
-          <div class="col-12">
-            <h4 class="text-white mb-1">Academic Roadmap</h4>
-            <p class="text-muted small mb-3" style="font-size: 0.85rem;">BS Information Technology — 2024 – Present</p>
-            
-            <div class="vertical-timeline">
-              <div class="timeline-node">
-                <p class="timeline-year">2024</p>
-                <p class="timeline-text">Started BS Information Technology</p>
-                <p class="text-muted small m-0" style="font-size: 0.8rem;">Began my journey in software and web development.</p>
-              </div>
-              <div class="timeline-node">
-                <p class="timeline-year">2024</p>
-                <p class="timeline-text">Created Bunny Hop</p>
-                <p class="text-muted small m-0" style="font-size: 0.8rem;">My first complete Python game project.</p>
-              </div>
-              <div class="timeline-node">
-                <p class="timeline-year">2025</p>
-                <p class="timeline-text">Built PinoyTix</p>
-                <p class="text-muted small m-0" style="font-size: 0.8rem;">Event ticketing system using PHP and MySQL.</p>
-              </div>
-              <div class="timeline-node">
-                <p class="timeline-year">2026</p>
-                <p class="timeline-text">Built Personal Portfolio</p>
-                <p class="text-muted small m-0" style="font-size: 0.8rem;">Portfolio inspired by MLBB and Valorant navigation.</p>
-              </div>
-            </div>
-
-            <div class="mt-4">
-              <p class="text-white font-weight-bold mb-2 v-font" style="font-size: 0.95rem;">Currently Learning</p>
-              <ul class="clean-bullet-list">
-                <li>React</li>
-                <li>UI/UX Design</li>
-                <li>Backend Development</li>
-              </ul>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="panel-contact" class="info-panel">
-    <div class="panel-content v-bracket-card">
-      <div class="panel-back-row">
-        <button class="panel-back-btn" onclick="closePanel('panel-contact')"><i class="bi bi-arrow-left"></i> Close Panel</button>
-        <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-contact')">Return to About Me</button>
-      </div>
-      <h3 class="text-white mb-4">Contact Gateway</h3>
-      <div class="scrollable-panel-body">
-        <div class="row g-3">
-          <div class="col-md-6">
-            <label class="small text-white mb-1">Name</label>
-            <input type="text" id="contact-name" class="dark-input" placeholder="Your name" />
-          </div>
-          <div class="col-md-6">
-            <label class="small text-white mb-1">Email</label>
-            <input type="email" id="contact-email" class="dark-input" placeholder="your@email.com" />
-          </div>
-          <div class="col-12">
-            <label class="small text-white mb-1">Message</label>
-            <textarea id="contact-message" class="dark-input" rows="4" placeholder="Type parameters..."></textarea>
-          </div>
-          <div class="col-12 text-end">
-            <button class="btn-send" onclick="sendMessage()">Send Message</button>
-          </div>
         </div>
       </div>
     </div>
@@ -1213,7 +1200,7 @@
     }
 
     // CONTINUOUS LIGHTWEIGHT TYPEWRITER ENGINE
-    const typewriterWords = ["IT Student", "Developer", "Frontend Enthusiast", "Gamer"];
+    const typewriterWords = ["IT Student", "Future Frontend Developer", "Future Pro Player"];
     let wordIdx = 0;
     let charIdx = 0;
     let isDeletingChar = false;
