@@ -20,1252 +20,599 @@
     })();
   </script>
 
-  <style>
-    /* =====================================================
-       VALORANT GLOBAL ARCHITECTURE (Strictly Non-Scrollable)
-    ===================================================== */
-    :root {
-      --v-bg:       #0f1117;
-      --v-surface:  #161920;
-      --v-red:      #ff4655;
-      --v-text-pri: #ece8e1;
-      --v-text-mut: #7e828a;
-      --v-border:   rgba(236, 232, 225, 0.1);
-    }
-
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden; 
-      font-family: 'Inter', sans-serif;
-      background-color: var(--v-bg);
-      color: var(--v-text-pri);
-    }
-
-    h1, h2, h3, h4, .v-font { 
-      font-family: 'Rajdhani', sans-serif; 
-      text-transform: uppercase;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-
-    /* Tactical View Grid Setup */
-    .view-section {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: none;
-      overflow: hidden;
-    }
-    .view-section.active {
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Constrained UI Scroll Container */
-    .scrollable-panel-body {
-      overflow-y: auto;
-      overflow-x: hidden;
-      max-height: calc(100vh - 180px);
-      padding-right: 8px;
-    }
-    .scrollable-panel-body::-webkit-scrollbar { width: 4px; }
-    .scrollable-panel-body::-webkit-scrollbar-track { background: transparent; }
-    .scrollable-panel-body::-webkit-scrollbar-thumb { background: var(--v-red); }
-
-
-    /* Corner Bracket Utilities */
-    .v-bracket-card {
-      position: relative;
-      background: var(--v-surface);
-      border: 1px solid var(--v-border);
-      overflow: hidden; /* Keeps the red corner brackets completely contained inside borders */
-    }
-    .v-bracket-card::before, .v-bracket-card::after {
-      content: "";
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      border: 2px solid var(--v-red);
-      pointer-events: none;
-    }
-    .v-bracket-card::before { top: 0; left: 0; border-right: 0; border-bottom: 0; }
-    .v-bracket-card::after { bottom: 0; right: 0; border-left: 0; border-top: 0; }
-
-    /* Eyebrow Label Layouts */
-    .section-eyebrow {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--v-red);
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-
-    /* =====================================================
-       SECTION 1 — HERO LOBBY
-    ===================================================== */
-    #hero-lobby {
-      align-items: center;
-      justify-content: center;
-      background: var(--v-bg);
-      gap: 24px;
-      padding: 40px 20px;
-    }
-
-    .lobby-mode-label {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 4px;
-      color: var(--v-text-mut);
-    }
-
-    .hero-banner-card {
-      padding: 30px 25px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      width: 260px;
-      text-align: center;
-    }
-
-    .hero-banner-photo {
-      width: 110px;
-      height: 110px;
-      border: 1px solid var(--v-red);
-      object-fit: cover;
-      padding: 4px;
-      background: var(--v-bg);
-    }
-
-    .hero-banner-name {
-      font-size: 28px;
-      color: var(--v-text-pri);
-      margin: 0;
-    }
-
-    .hero-banner-role {
-      font-size: 13px;
-      color: var(--v-text-mut);
-      letter-spacing: 2px;
-      margin: 0;
-    }
-
-    .btn-v-action {
-      font-family: 'Rajdhani', sans-serif;
-      padding: 12px 50px;
-      background: var(--v-red);
-      color: var(--v-bg);
-      font-size: 15px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      border: 1px solid transparent;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-    .btn-v-action:hover {
-      background: transparent;
-      border-color: var(--v-red);
-      color: var(--v-red);
-    }
-
-    /* =====================================================
-       SECTION 2 — ABOUT ME HUB
-    ===================================================== */
-    #about-me-hub {
-      background: var(--v-bg);
-      justify-content: center;
-      align-items: center;
-      padding: 30px 20px;
-    }
-
-    .hub-scroll-container {
-      width: 100%;
-      max-width: 950px;
-      margin: auto;
-      overflow-y: auto;
-      overflow-x: hidden;
-      max-height: 95vh;
-      padding-right: 10px;
-    }
-    
-    .hub-scroll-container::-webkit-scrollbar { width: 6px; }
-    .hub-scroll-container::-webkit-scrollbar-track { background: var(--v-bg); }
-    .hub-scroll-container::-webkit-scrollbar-thumb { background: var(--v-red); }
-    .hub-scroll-container::-webkit-scrollbar-thumb:hover { background: var(--v-text-pri); }
-
-    .profile-section-wrapper {
-      padding-top: 20px;
-      padding-bottom: 20px;
-    }
-
-    .profile-frame {
-      width: 160px;
-      height: 160px;
-      object-fit: cover;
-      object-position: center top;
-      border: 1px solid var(--v-red);
-      padding: 4px;
-    }
-
-    .hub-name {
-      font-size: 3rem;
-      color: var(--v-text-pri);
-      margin-bottom: 0;
-    }
-
-    .hub-sub-line {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--v-red);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 8px;
-    }
-
-    .personal-quote {
-      font-size: 0.85rem;
-      color: var(--v-text-mut);
-      margin-bottom: 14px;
-    }
-
-    .hub-intro {
-      color: var(--v-text-pri);
-      font-size: 0.95rem;
-      line-height: 1.6;
-      max-width: 600px;
-    }
-
-    /* Tactical Modular Grid Fields */
-    .skills-embed-section {
-      border-top: 1px solid var(--v-border);
-      padding-top: 24px;
-      margin-top: 24px;
-    }
-
-    .skill-box {
-      background: var(--v-surface);
-      border: 1px solid var(--v-border);
-      padding: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 80px;
-    }
-    .skill-box i {
-      font-size: 1.3rem;
-      color: var(--v-red);
-      margin-bottom: 4px;
-    }
-    .skill-box span {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-
-    /* Diamond Indicator Component Lists */
-    .clean-list-section {
-      border-top: 1px solid var(--v-border);
-      padding-top: 24px;
-      margin-top: 24px;
-    }
-    .clean-bullet-list {
-      margin: 0;
-      padding-left: 0;
-      list-style-type: none;
-    }
-    .clean-bullet-list li {
-      font-size: 14px;
-      color: var(--v-text-pri);
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .clean-bullet-list li::before {
-      content: "";
-      width: 5px;
-      height: 5px;
-      background: var(--v-red);
-      transform: rotate(45deg);
-      display: inline-block;
-      flex-shrink: 0;
-    }
-
-    /* Hub System Navigation Grid Link Blocks */
-    .hub-nav-grid {
-      border-top: 1px solid var(--v-border);
-      padding-top: 24px;
-      margin-top: 24px;
-      padding-bottom: 25px;
-    }
-
-    .btn-hub-nav {
-      width: 100%;
-      background: var(--v-surface);
-      border: 1px solid var(--v-border);
-      color: var(--v-text-pri);
-      padding: 14px 20px;
-      text-align: left;
-      font-family: 'Rajdhani', sans-serif;
-      font-weight: 600;
-      font-size: 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: all 0.15s ease;
-    }
-    .btn-hub-nav:hover {
-      border-color: var(--v-red);
-      background: rgba(255, 70, 85, 0.03);
-    }
-    .btn-hub-nav .nav-arrow {
-      color: var(--v-red);
-    }
-
-    .btn-hub-exit {
-      width: 100%;
-      background: transparent;
-      border: 1px solid var(--v-border);
-      color: var(--v-text-mut);
-      font-family: 'Rajdhani', sans-serif;
-      font-weight: 600;
-      font-size: 16px;
-      padding: 14px 20px;
-      text-align: center;
-      text-transform: uppercase;
-      transition: all 0.15s ease;
-    }
-    .btn-hub-exit:hover {
-      border-color: var(--v-red);
-      color: var(--v-text-pri);
-      background: rgba(255, 70, 85, 0.05);
-    }
-
-    /* =====================================================
-       SECTION 3 — THE NIGHT MARKET (Projects Hub)
-    ===================================================== */
-    #night-market {
-      background: var(--v-bg);
-      justify-content: center;
-      align-items: center;
-      padding: 40px 20px;
-    }
-
-    .nm-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--v-border);
-      margin-bottom: 30px;
-    }
-
-    .nm-eyebrow {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--v-text-mut);
-      margin: 0;
-    }
-
-    .btn-return-hub {
-      background: transparent;
-      border: 1px solid var(--v-border);
-      color: var(--v-text-pri);
-      font-family: 'Rajdhani', sans-serif;
-      padding: 6px 16px;
-      font-size: 13px;
-      text-transform: uppercase;
-      transition: all 0.15s ease;
-    }
-    .btn-return-hub:hover {
-      border-color: var(--v-red);
-      color: var(--v-red);
-    }
-
-    /* Tactical Project Panel Units */
-    .nm-card {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      cursor: pointer;
-    }
-    .nm-card:hover {
-      border-color: var(--v-red);
-    }
-
-    .nm-card-preview {
-      width: 100%;
-      height: 130px;
-      background-color: var(--v-bg);
-      background-size: cover;
-      background-position: center;  
-      border-bottom: 1px solid var(--v-border);
-    }
-
-    .nm-card-body {
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      flex-grow: 1;
-    }
-
-    .nm-card-offer {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      color: var(--v-red);
-      margin-bottom: 4px;
-    }
-    
-    .nm-card-featured-badge {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      background: var(--v-red);
-      color: var(--v-text-pri);
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 2px 8px;
-      text-transform: uppercase;
-      z-index: 2;
-    }
-
-    .nm-card-title {
-      font-size: 1.3rem;
-      color: var(--v-text-pri);
-      margin: 0 0 2px 0;
-    }
-    .nm-card-tag {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--v-text-mut);
-      text-transform: uppercase;
-      margin: 0;
-    }
-
-    /* =====================================================
-       FULL TEXT OVERLAY MODULE SYSTEM (Sub-Panels)
-    ===================================================== */
-    .info-panel {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(15, 17, 23, 0.98);
-      z-index: 20;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 30px 24px;
-    }
-    .info-panel.active { display: flex; }
-
-    .panel-content {
-      width: 100%;
-      max-width: 820px;
-      max-height: 90vh;
-      padding: 35px;
-    }
-
-    .panel-back-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 24px;
-    }
-
-    .panel-back-btn {
-      background: transparent;
-      border: none;
-      color: var(--v-text-mut);
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 14px;
-      text-transform: uppercase;
-      padding: 0;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .panel-back-btn:hover { color: var(--v-red); }
-
-    .panel-header-block {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-
-    .panel-status-badge {
-      display: inline-block;
-      border: 1px solid var(--v-border);
-      color: var(--v-text-mut);
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      padding: 2px 10px;
-    }
-
-    .panel-tag {
-      display: inline-block;
-      background: rgba(255, 70, 85, 0.1);
-      color: var(--v-red);
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 2px 12px;
-    }
-
-    /* Role Info Block Containers */
-    .role-section {
-      background: var(--v-bg);
-      border-left: 2px solid var(--v-red);
-      padding: 16px;
-      margin-top: 20px;
-    }
-    .role-title {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--v-red);
-      margin-bottom: 8px;
-      text-transform: uppercase;
-    }
-    .role-list {
-      margin: 0;
-      padding-left: 0;
-      list-style-type: none;
-    }
-    .role-list li {
-      font-size: 13px;
-      color: var(--v-text-pri);
-      margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .role-list li::before {
-      content: "";
-      width: 4px;
-      height: 4px;
-      background: var(--v-text-mut);
-      transform: rotate(45deg);
-    }
-
-    .tech-chip {
-      background: var(--v-bg);
-      border: 1px solid var(--v-border);
-      font-family: 'Rajdhani', sans-serif;
-      font-weight: 600;
-      padding: 4px 12px;
-      font-size: 13px;
-      color: var(--v-text-pri);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin: 4px 4px 4px 0;
-      text-transform: uppercase;
-    }
-    .tech-chip .dot { width: 6px; height: 6px; background: var(--v-red) !important; }
-
-    .related-bar {
-      border-top: 1px solid var(--v-border);
-      padding-top: 20px;
-      margin-top: 30px;
-    }
-    .related-bar .btn-outline-info {
-      border-color: var(--v-border);
-      color: var(--v-text-pri);
-      font-family: 'Rajdhani', sans-serif;
-      text-transform: uppercase;
-      border-radius: 0;
-    }
-    .related-bar .btn-outline-info:hover {
-      background: var(--v-red);
-      border-color: var(--v-red);
-      color: var(--v-text-pri);
-    }
-
-    /* Vertical Dynamic Timeline Track Layout */
-    .vertical-timeline {
-      position: relative;
-      padding-left: 20px;
-      border-left: 1px solid var(--v-border);
-      margin-top: 16px;
-    }
-    .timeline-node {
-      position: relative;
-      margin-bottom: 24px;
-    }
-    .timeline-node::before {
-      content: "";
-      position: absolute;
-      left: -23.5px;
-      top: 6px;
-      width: 6px;
-      height: 6px;
-      background: var(--v-red);
-      transform: rotate(45deg);
-    }
-    .timeline-year {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--v-red);
-      margin-bottom: 2px;
-    }
-    .timeline-text {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--v-text-pri);
-      margin: 0;
-    }
-
-    /* Interface Data Input Targets */
-    .dark-input {
-      background: var(--v-bg);
-      border: 1px solid var(--v-border);
-      color: var(--v-text-pri);
-      padding: 12px;
-      width: 100%;
-      font-size: 14px;
-    }
-    .dark-input:focus { outline: none; border-color: var(--v-red); }
-
-    .btn-send {
-      font-family: 'Rajdhani', sans-serif;
-      background: var(--v-red);
-      color: var(--v-text-pri);
-      font-weight: 700;
-      border: none;
-      padding: 10px 24px;
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-  </style>
+  <link rel="stylesheet" href="assets/style.css"/>
 </head>
 <body>
 
-  <section id="hero-lobby" class="view-section active">
-    <p class="lobby-mode-label">// PERSONAL · PORTFOLIO</p>
-
-    <div class="hero-banner-card v-bracket-card">
-      <img src="assets/makupfp.jpg" alt="Maku" class="hero-banner-photo" />
-      <p class="hero-banner-name">MAKU</p>
-      <p class="hero-banner-role">IT STUDENT</p>
+  <header class="global-tab-header" id="globalHeader">
+    <div class="lobby-tabs">
+      <button class="lobby-tab active" data-tab="home" onclick="setLobbyTab(this); navigateToSection('about-me-hub')">About Me</button>
+      <button class="lobby-tab" onclick="setLobbyTab(this); navigateToSection('night-market')">Projects</button>
+      <button class="lobby-tab" onclick="setLobbyTab(this); openPanel('panel-education')">Education</button>
+      <button class="lobby-tab" onclick="setLobbyTab(this); openPanel('panel-academics')">Academics</button>
+      <button class="lobby-tab" onclick="setLobbyTab(this); openPanel('panel-esports')">ESPORTS</button>
+      <button class="lobby-tab" onclick="setLobbyTab(this); openPanel('panel-contact')">Contact Me</button>
     </div>
+    <button class="lobby-back-corner" id="backToLobbyBtn"><i class="bi bi-arrow-left"></i><span class="back-label">Back to Lobby</span></button>
+  </header>
 
-    <button class="btn-v-action" id="enterBtn">ENTER</button>
-  </section>
+  <div class="screens-viewport">
 
-  <section id="about-me-hub" class="view-section">
-    <div class="hub-scroll-container">
-      
-      <div class="row align-items-center g-4 profile-section-wrapper">
-        <div class="col-md-3 text-center text-md-start">
-          <img src="assets/makuformal.png" alt="Mark Justin Tria" class="profile-frame"/>
-        </div>
-        <div class="col-md-9 text-center text-md-start">
-          <h1 class="hub-name">Mark Justin Tria</h1>
-          <p class="hub-sub-line"><span id="typewriter-text"></span><span class="typewriter-cursor">|</span></p>
-          <p class="personal-quote">"Every project teaches something new."</p>
-          <p class="hub-intro">
-            Hi! I'm a 2nd-year IT student at Polytechnic University of the Philippines – Sto. Tomas who loves to learn and explore the world of web development. Outside of school, I enjoy playing online games and travelling.
-          </p>
-        </div>
+    <section id="hero-lobby" class="view-section active">
+      <div class="lobby-bg-art" aria-hidden="true">
+        <img src="assets/Akali.png" class="lobby-bg-char bg-char-1" alt="" />
+        <img src="assets/Hirara.png" class="lobby-bg-char bg-char-2" alt="" />
+        <img src="assets/Jett.png" class="lobby-bg-char bg-char-3" alt="" />
+      </div>
+      <p class="lobby-mode-label">// PERSONAL · PORTFOLIO</p>
+
+      <div class="hero-banner-card v-bracket-card">
+        <img src="assets/makupfp.jpg" alt="Maku" class="hero-banner-photo" />
+        <p class="hero-banner-name">MAKU</p>
+        <p class="hero-banner-role">IT STUDENT</p>
       </div>
 
-      <div class="skills-embed-section">
-        <p class="section-eyebrow">// Technical Skills</p>
-        <div class="row g-2">
-          <div class="col-6 col-sm-4 col-md-3">
-            <div class="skill-box">
-              <i class="bi bi-filetype-html"></i>
-              <span>HTML5</span>
-            </div>
-          </div>
-          <div class="col-6 col-sm-4 col-md-3">
-            <div class="skill-box">
-              <i class="bi bi-filetype-css"></i>
-              <span>CSS3</span>
-            </div>
-          </div>
-          <div class="col-6 col-sm-4 col-md-3">
-            <div class="skill-box">
-              <i class="bi bi-filetype-js"></i>
-              <span>JavaScript</span>
-            </div>
-          </div>
-          <div class="col-6 col-sm-4 col-md-3">
-            <div class="skill-box">
-              <i class="bi bi-bootstrap"></i>
-              <span>Bootstrap</span>
-            </div>
-          </div>
-          <div class="col-6 col-sm-4 col-md-3">
-            <div class="skill-box">
-              <i class="bi bi-filetype-php"></i>
-              <span>PHP</span>
-            </div>
-          </div>
-          <div class="col-6 col-sm-4 col-md-3">
-            <div class="skill-box">
-              <i class="bi bi-database"></i>
-              <span>MySQL</span>
-            </div>
-          </div>
-          <div class="col-6 col-sm-4 col-md-3">
-            <div class="skill-box">
-              <i class="bi bi-filetype-py"></i>
-              <span>Python</span>
-            </div>
-          </div>
-          <div class="col-6 col-sm-4 col-md-3">
-            <div class="skill-box">
-              <i class="bi bi-pen-fill"></i>
-              <span>Figma</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <button class="btn-v-action" id="enterBtn">ENTER</button>
+    </section>
 
-      <div class="clean-list-section">
-        <div class="row g-4">
-          <div class="col-md-6">
-            <p class="section-eyebrow">// Currently Working On</p>
-            <ul class="clean-bullet-list">
-              <li>Improving my Frontend Development</li>
-              <li>Learning more About Coding</li>
-              <li>Building better UI/UX Designs</li>
-            </ul>
+    <section id="about-me-hub" class="view-section">
+      <div class="hub-scroll-container">
+        
+        <div class="row align-items-center g-4 profile-section-wrapper">
+          <div class="col-md-3 text-start">
+            <img src="assets/makuformal.png" alt="Mark Justin Tria" class="profile-frame"/>
           </div>
-          <div class="col-md-6">
-            <p class="section-eyebrow">// Outside Coding</p>
-            <ul class="clean-bullet-list">
-              <li>Playing Online Games</li>
-              <li> Traveling and Exploring New Places</li>
-              <li>Learning UI/ UX Design</li>
-              <li>Following and Pursuing Esports</li>
-            </ul>
+          <div class="col-md-9 text-start">
+            <h1 class="hub-name">Mark Justin Tria</h1>
+            <p class="hub-sub-line"><span id="typewriter-text"></span><span class="typewriter-cursor">|</span></p>
+            <p class="personal-quote">"Every project teaches something new."</p>
+            <p class="hub-intro">
+              Hi! I'm a 2nd-year IT student at Polytechnic University of the Philippines – Sto. Tomas who loves to learn and explore the world of web development. Outside of school, I enjoy playing online games and travelling.
+            </p>
           </div>
         </div>
-      </div>  
 
-      <div class="hub-nav-grid">
-        <div class="row g-2 mb-2">
-          <div class="col-6 col-md-4">
-            <button class="btn-hub-nav" onclick="navigateToSection('night-market')">
-              <span>Projects</span> <span class="nav-arrow">→</span>
-            </button>
-          </div>
-          <div class="col-6 col-md-4">
-            <button class="btn-hub-nav" onclick="openPanel('panel-education')">
-              <span>Education</span> <span class="nav-arrow">→</span>
-            </button>
-          </div>
-          <div class="col-12 col-md-4">
-            <button class="btn-hub-nav" onclick="openPanel('panel-esports')">
-              <span>Achievements</span> <span class="nav-arrow">→</span>
-            </button>
-          </div>
-        </div>
-        <div class="row g-2">
-          <div class="col-6">
-            <button class="btn-hub-exit" id="backToLobbyBtn">← Return to Lobby</button>
-          </div>
-          <div class="col-6">
-            <button class="btn-hub-nav" onclick="openPanel('panel-contact')">
-              <span>Contact Me</span> <span class="nav-arrow">→</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-  <div id="panel-esports" class="info-panel">
-    <div class="panel-content v-bracket-card">
-      <div class="panel-back-row">
-        <button class="panel-back-btn" onclick="closePanel('panel-esports')"><i class="bi bi-arrow-left"></i> Close Panel</button>
-        <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-esports')">Return to About Me</button>
-      </div>
-      <div class="scrollable-panel-body">
-        <div class="panel-header-block">
-          <span class="panel-tag">COMPETITIVE LOGS</span>
-          <span class="panel-status-badge">Esports Bracket</span>
-        </div>
-        <h2 class="text-white mb-4">ESPORTS</h2>
-        <div class="row g-3">
-          <div class="col-md-4">
-            <div class="v-bracket-card" style="height: 100%; display: flex; flex-direction: column;">
-              <div style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
-                <img src="assets/MSL CHAMP.jpg" alt="MSL Champion" style="max-width: 100%; max-height: 100%; object-fit: cover;">
-              </div>
-              <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column;">
-                <span style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Achievement #01</span>
-                <h4 style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">Champion</h4>
-                <p style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">MSL Regional Match Bracket</p>
-                <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">Won the regional tournament through teamwork, communication, and consistent performance throughout the competition.</p>
+        <div class="skills-embed-section">
+          <p class="section-eyebrow">// Technical Skills</p>
+          <div class="row g-2">
+            <div class="col-6 col-sm-4 col-md-3">
+              <div class="skill-box">
+                <i class="bi bi-filetype-html"></i>
+                <span>HTML5</span>
               </div>
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="v-bracket-card" style="height: 100%; display: flex; flex-direction: column;">
-              <div style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
-                <img src="assets/PCC.jpg" alt="PCC 6th Place" style="max-width: 100%; max-height: 100%; object-fit: cover;">
-              </div>
-              <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column;">
-                <span style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Achievement #02</span>
-                <h4 style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">6th Place</h4>
-                <p style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">PCC Tournament</p>
-                <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">Finished in the Top 6 among multiple competing teams in a highly competitive tournament.</p>
+            <div class="col-6 col-sm-4 col-md-3">
+              <div class="skill-box">
+                <i class="bi bi-filetype-css"></i>
+                <span>CSS3</span>
               </div>
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="v-bracket-card" style="height: 100%; display: flex; flex-direction: column;">
-              <div style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
-                <img src="assets/2nd Place.jpg" alt="2nd Place" style="max-width: 100%; max-height: 100%; object-fit: cover;">
+            <div class="col-6 col-sm-4 col-md-3">
+              <div class="skill-box">
+                <i class="bi bi-filetype-js"></i>
+                <span>JavaScript</span>
               </div>
-              <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column;">
-                <span style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Achievement #03</span>
-                <h4 style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">2nd Place</h4>
-                <p style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">MLBB Campus Tournament</p>
-                <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">Reached the finals and secured 2nd place after competing against strong teams from the campus.</p>
+            </div>
+            <div class="col-6 col-sm-4 col-md-3">
+              <div class="skill-box">
+                <i class="bi bi-bootstrap"></i>
+                <span>Bootstrap</span>
+              </div>
+            </div>
+            <div class="col-6 col-sm-4 col-md-3">
+              <div class="skill-box">
+                <i class="bi bi-filetype-php"></i>
+                <span>PHP</span>
+              </div>
+            </div>
+            <div class="col-6 col-sm-4 col-md-3">
+              <div class="skill-box">
+                <i class="bi bi-database"></i>
+                <span>MySQL</span>
+              </div>
+            </div>
+            <div class="col-6 col-sm-4 col-md-3">
+              <div class="skill-box">
+                <i class="bi bi-filetype-py"></i>
+                <span>Python</span>
+              </div>
+            </div>
+            <div class="col-6 col-sm-4 col-md-3">
+              <div class="skill-box">
+                <i class="bi bi-pen-fill"></i>
+                <span>Figma</span>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
 
-  <div id="panel-education" class="info-panel">
-    <div class="panel-content v-bracket-card">
-      <div class="panel-back-row">
-        <button class="panel-back-btn" onclick="closePanel('panel-education')"><i class="bi bi-arrow-left"></i> Close Panel</button>
-        <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-education')">Return to About Me</button>
-      </div>
-      <div class="scrollable-panel-body">
-        <div class="row g-4">
-          <div class="col-12">
-            <h4 class="text-white mb-1">Academic Roadmap</h4>
-            <p class="text-white small mb-3" style="font-size: 0.85rem;">BS Information Technology — 2024 – Present</p>
-            <div class="vertical-timeline">
-              <div class="timeline-node">
-                <p class="timeline-year">2024-ONGOING</p>
-                <p class="timeline-text">PUP STO TOMAS CAMPUS - BS Information Technology</p>
-              </div>
-              <div class="timeline-node">
-                <p class="timeline-year">2022-2024</p>
-                <p class="timeline-text">TANAUAN INSTITUTE (STEM STRAND)</p>
-              </div>
-              <div class="timeline-node">
-                <p class="timeline-year">2018-2022</p>
-                <p class="timeline-text">RAMON MAGSAYSAY HIGHSCHOOL - TANAUAN CITY INTEGRATED HIGHSCHOOL</p>
-              </div>
-              <div class="timeline-node">
-                <p class="timeline-year">2012-2018</p>
-                <p class="timeline-text">LEGARDA ELEMENTARY SCHOOL</p>
-              </div>
-            </div>
-            <div class="mt-4">
-              <p class="text-white font-weight-bold mb-2 v-font" style="font-size: 0.95rem;">Currently Exploring</p>
+        <div class="clean-list-section">
+          <div class="row g-4">
+            <div class="col-md-6">
+              <p class="section-eyebrow">// Currently Working On</p>
               <ul class="clean-bullet-list">
-                <li>Bootstrap</li>
-                <li>UI/UX Design</li>
-                <li>Frontend/Backend Development</li>
+                <li>Improving my Frontend Development</li>
+                <li>Learning more About Coding</li>
+                <li>Building better UI/UX Designs</li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <p class="section-eyebrow">// Outside Coding</p>
+              <ul class="clean-bullet-list">
+                <li>Playing Online Games</li>
+                <li> Traveling and Exploring New Places</li>
+                <li>Learning UI/ UX Design</li>
+                <li>Following and Pursuing Esports</li>
               </ul>
             </div>
           </div>
+        </div>  
+
+      </div>
+    </section>
+
+    <div id="panel-esports" class="info-panel">
+      <div class="panel-content v-bracket-card">
+        <div class="panel-back-row">
+          <button class="panel-back-btn" onclick="closePanel('panel-esports')"><i class="bi bi-arrow-left"></i> Close Panel</button>
+          <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-esports')">Return to About Me</button>
+        </div>
+        <div class="scrollable-panel-body">
+          <div class="panel-header-block">
+            <span class="panel-tag">COMPETITIVE LOGS</span>
+            <span class="panel-status-badge">Esports Bracket</span>
+          </div>
+          <h2 class="text-white mb-4">ESPORTS</h2>
+          <div class="esports-layout">
+            <div class="esports-main-col">
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <div class="v-bracket-card" style="height: 100%; display: flex; flex-direction: column;">
+                    <div style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
+                      <img src="assets/MSL CHAMP.jpg" alt="MSL Champion" style="max-width: 100%; max-height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column;">
+                      <span style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Achievement #01</span>
+                      <h4 style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">Champion</h4>
+                      <p style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">MSL Regional Match Bracket</p>
+                      <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">Won the regional tournament through teamwork, communication, and consistent performance throughout the competition.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="v-bracket-card" style="height: 100%; display: flex; flex-direction: column;">
+                    <div style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
+                      <img src="assets/PCC.jpg" alt="PCC 6th Place" style="max-width: 100%; max-height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column;">
+                      <span style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Achievement #02</span>
+                      <h4 style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">6th Place</h4>
+                      <p style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">PCC Tournament</p>
+                      <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">Finished in the Top 6 among multiple competing teams in a highly competitive tournament.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="v-bracket-card" style="height: 100%; display: flex; flex-direction: column;">
+                    <div style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
+                      <img src="assets/2nd Place.jpg" alt="2nd Place" style="max-width: 100%; max-height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column;">
+                      <span style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Achievement #03</span>
+                      <h4 style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">2nd Place</h4>
+                      <p style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">MLBB Campus Tournament</p>
+                      <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">Reached the finals and secured 2nd place after competing against strong teams from the campus.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="esports-team-col">
+              <p class="section-eyebrow">// My Esports Team</p>
+              <div class="team-roster-scroll">
+                
+                <div class="team-player-card">
+                  <div class="team-player-avatar">
+                    <img src="assets/jul.jpg" alt="Player 01" class="player-img">
+                  </div>
+                  <div class="team-player-info">
+                    <p class="team-player-name">JULIAN</p>
+                    <p class="team-player-role">GOLD</p>
+                  </div>
+                </div>
+
+                <div class="team-player-card">
+                  <div class="team-player-avatar">
+                    <img src="assets/aminavi.jpg" alt="Player 02" class="player-img">
+                  </div>
+                  <div class="team-player-info">
+                    <p class="team-player-name">AMINAVI</p>
+                    <p class="team-player-role">ROAM</p>
+                  </div>
+                </div>
+
+                <div class="team-player-card">
+                  <div class="team-player-avatar">
+                    <img src="assets/gian.jpg" alt="Player 03" class="player-img">
+                  </div>
+                  <div class="team-player-info">
+                    <p class="team-player-name">GIAN</p>
+                    <p class="team-player-role">JUNGLE</p>
+                  </div>
+                </div>
+
+                <div class="team-player-card">
+                  <div class="team-player-avatar">
+                    <img src="assets/denz.jpg" alt="Player 04" class="player-img">
+                  </div>
+                  <div class="team-player-info">
+                    <p class="team-player-name">DENZ</p>
+                    <p class="team-player-role">GOLD/FIGTHER</p>
+                  </div>
+                </div>
+
+                <div class="team-player-card">
+                  <div class="team-player-avatar">
+                    <img src="assets/kots.jpg" alt="Player 05" class="player-img">
+                  </div>
+                  <div class="team-player-info">
+                    <p class="team-player-name">CALYXSELOSO</p>
+                    <p class="team-player-role">COACH/MANAGER/PUBLIC SERVANT</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div id="panel-contact" class="info-panel">
-    <div class="panel-content v-bracket-card">
-      <div class="panel-back-row">
-        <button class="panel-back-btn" onclick="closePanel('panel-contact')"><i class="bi bi-arrow-left"></i> Close Panel</button>
-        <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-contact')">Return to About Me</button>
+    <div id="panel-education" class="info-panel">
+      <div class="panel-content v-bracket-card">
+        <div class="panel-back-row">
+          <button class="panel-back-btn" onclick="closePanel('panel-education')"><i class="bi bi-arrow-left"></i> Close Panel</button>
+          <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-education')">Return to About Me</button>
+        </div>
+        <div class="scrollable-panel-body">
+          <div class="row g-4">
+            <div class="col-12">
+              <h4 class="text-white mb-1">Academic Roadmap</h4>
+              <p class="text-white small mb-3" style="font-size: 0.85rem;">BS Information Technology — 2024 – Present</p>
+              <div class="vertical-timeline">
+                <div class="timeline-node">
+                  <p class="timeline-year">2024-ONGOING</p>
+                  <p class="timeline-text">PUP STO TOMAS CAMPUS - BS Information Technology</p>
+                </div>
+                <div class="timeline-node">
+                  <p class="timeline-year">2022-2024</p>
+                  <p class="timeline-text">TANAUAN INSTITUTE (STEM STRAND)</p>
+                </div>
+                <div class="timeline-node">
+                  <p class="timeline-year">2018-2022</p>
+                  <p class="timeline-text">RAMON MAGSAYSAY HIGHSCHOOL - TANAUAN CITY INTEGRATED HIGHSCHOOL</p>
+                </div>
+                <div class="timeline-node">
+                  <p class="timeline-year">2012-2018</p>
+                  <p class="timeline-text">LEGARDA ELEMENTARY SCHOOL</p>
+                </div>
+              </div>
+              <div class="mt-4">
+                <p class="text-white font-weight-bold mb-2 v-font" style="font-size: 0.95rem;">Currently Exploring</p>
+                <ul class="clean-bullet-list">
+                  <li>Bootstrap</li>
+                  <li>UI/UX Design</li>
+                  <li>Frontend/Backend Development</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <h3 class="text-white mb-4">Contact Gateway</h3>
-      <div class="scrollable-panel-body">
+    </div>
+
+    <div id="panel-academics" class="info-panel">
+      <div class="panel-content v-bracket-card">
+        <div class="panel-back-row">
+          <button class="panel-back-btn" onclick="closePanel('panel-academics')"><i class="bi bi-arrow-left"></i> Close Panel</button>
+          <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-academics')">Return to About Me</button>
+        </div>
+        <div class="scrollable-panel-body">
+          <div class="panel-header-block">
+            <span class="panel-tag">SCHOOL RECORDS</span>
+            <span class="panel-status-badge">Academic Highlights</span>
+          </div>
+          <h2 class="text-white mb-4">ACADEMICS</h2>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <div class="v-bracket-card" style="height: 100%; display: flex; flex-direction: column;">
+                <div style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
+                  <img src="assets/Certificate.png" alt="Cisco Packet Tracer Certificate" style="max-width: 100%; max-height: 100%; object-fit: cover;">
+                </div>
+                <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column;">
+                  <span style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Certificate #01</span>
+                  <h4 style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">Cisco Certificate</h4>
+                  <p style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">Welcome to Cisco Packet Tracer</p>
+                  <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">Completed the introductory Cisco Packet Tracer course, covering the basics of network simulation and device configuration.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="v-bracket-card" style="height: 100%; display: flex; flex-direction: column;">
+                <div style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
+                  <img src="assets/origami.jpg" alt="Origami Project" style="max-width: 100%; max-height: 100%; object-fit: cover;">
+                </div>
+                <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column;">
+                  <span style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Project #01</span>
+                  <h4 style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">Origami Project</h4>
+                  <p style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">Group Activity</p>
+                  <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">A hands-on origami activity made with classmates, practicing patience, precision, and teamwork outside of code.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="v-bracket-card" style="height: 100%; display: flex; flex-direction: column;">
+                <div style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
+                  <img src="assets/CallingCard.png" alt="Calling Card" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                </div>
+                <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column;">
+                  <span style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Project #02</span>
+                  <h4 style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">Calling Card</h4>
+                  <p style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">Personal Branding</p>
+                  <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">My own calling card design, made as a class requirement to practice layout and personal branding basics.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="panel-contact" class="info-panel">
+      <div class="panel-content v-bracket-card">
+        <div class="panel-back-row">
+          <button class="panel-back-btn" onclick="closePanel('panel-contact')"><i class="bi bi-arrow-left"></i> Close Panel</button>
+          <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-contact')">Return to About Me</button>
+        </div>
+        <h3 class="text-white mb-4">Contact Gateway</h3>
+        <div class="scrollable-panel-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="small text-white mb-1">Name</label>
+              <input type="text" id="contact-name" class="dark-input" placeholder="Your name" />
+            </div>
+            <div class="col-md-6">
+              <label class="small text-white mb-1">Email</label>
+              <input type="email" id="contact-email" class="dark-input" placeholder="your@email.com" />
+            </div>
+            <div class="col-12">
+              <label class="small text-white mb-1">Message</label>
+              <textarea id="contact-message" class="dark-input" rows="4" placeholder="Type parameters..."></textarea>
+            </div>
+            <div class="col-12 text-end">
+              <button class="btn-send" onclick="sendMessage()">Send Message</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="night-market" class="view-section">
+      <div class="container" style="max-width: 1000px;">
+        
+        <div class="nm-header">
+          <p class="nm-eyebrow">// LATEST PROJECTS</p>
+          <button class="btn-return-hub" onclick="navigateToSection('about-me-hub')">Return to About Me</button>
+        </div>
+
         <div class="row g-3">
-          <div class="col-md-6">
-            <label class="small text-white mb-1">Name</label>
-            <input type="text" id="contact-name" class="dark-input" placeholder="Your name" />
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="nm-card v-bracket-card" onclick="openPanel('panel-pinoytix')">
+              <span class="nm-card-featured-badge">ONGOING</span>
+              <div class="nm-card-preview" style="background-image: url('assets/pinoytixx.png')"></div>
+              <div class="nm-card-body">
+                <span class="nm-card-offer">PROJECT #01</span>
+                <div>
+                  <h4 class="nm-card-title">PinoyTix</h4>
+                  <p class="nm-card-tag">PHP + MySQL</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="col-md-6">
-            <label class="small text-white mb-1">Email</label>
-            <input type="email" id="contact-email" class="dark-input" placeholder="your@email.com" />
-          </div>
-          <div class="col-12">
-            <label class="small text-white mb-1">Message</label>
-            <textarea id="contact-message" class="dark-input" rows="4" placeholder="Type parameters..."></textarea>
-          </div>
-          <div class="col-12 text-end">
-            <button class="btn-send" onclick="sendMessage()">Send Message</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  </section>
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="nm-card v-bracket-card" onclick="openPanel('panel-bunnyhop')">
+              <div class="nm-card-preview" style="background-image: url('assets/bunny\ hop.png');"></div>
+              <div class="nm-card-body">
+                <span class="nm-card-offer">PROJECT #02</span>
+                <div>
+                  <h4 class="nm-card-title">Bunny Hop</h4>
+                  <p class="nm-card-tag">Python Game</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-  <section id="night-market" class="view-section">
-    <div class="container" style="max-width: 1000px;">
-      
-      <div class="nm-header">
-        <p class="nm-eyebrow">// LATEST PROJECTS</p>
-        <button class="btn-return-hub" onclick="navigateToSection('about-me-hub')">Return to About Me</button>
-      </div>
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="nm-card v-bracket-card" onclick="openPanel('panel-ecommerce')">
+              <div class="nm-card-preview" style="background-image: url('assets/ecommercewebsite.png');"></div>
+              <div class="nm-card-body">
+                <span class="nm-card-offer">PROJECT #03</span>
+                <div>
+                  <h4 class="nm-card-title">E-Commerce</h4>
+                  <p class="nm-card-tag">PHP + MySQL Backend</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-      <div class="row g-3">
-        <div class="col-12 col-sm-6 col-md-3">
-          <div class="nm-card v-bracket-card" onclick="openPanel('panel-pinoytix')">
-            <span class="nm-card-featured-badge">ONGOING</span>
-            <div class="nm-card-preview" style="background-image: url('assets/pinoytixx.png')"></div>
-            <div class="nm-card-body">
-              <span class="nm-card-offer">PROJECT #01</span>
-              <div>
-                <h4 class="nm-card-title">PinoyTix</h4>
-                <p class="nm-card-tag">PHP + MySQL</p>
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="nm-card v-bracket-card" onclick="openPanel('panel-portfolio')">
+              <div class="nm-card-preview" style="background-image: url('assets/personalwork.png');"></div>
+              <div class="nm-card-body">
+                <span class="nm-card-offer">PROJECT #04</span>
+                <div>
+                  <h4 class="nm-card-title">Personal Portfolio</h4>
+                  <p class="nm-card-tag">Bootstrap + Figma</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="col-12 col-sm-6 col-md-3">
-          <div class="nm-card v-bracket-card" onclick="openPanel('panel-bunnyhop')">
-            <div class="nm-card-preview" style="background-image: url('assets/bunny\ hop.png');"></div>
-            <div class="nm-card-body">
-              <span class="nm-card-offer">PROJECT #02</span>
-              <div>
-                <h4 class="nm-card-title">Bunny Hop</h4>
-                <p class="nm-card-tag">Python Game</p>
-              </div>
-            </div>
+      </div>
+    </section>
+
+    <div id="panel-pinoytix" class="info-panel">
+      <div class="panel-content v-bracket-card">
+        <div class="panel-back-row">
+          <button class="panel-back-btn" onclick="closePanel('panel-pinoytix')"><i class="bi bi-arrow-left"></i> Back to Projects</button>
+          <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-pinoytix')">Return to About Me</button>
+        </div>
+        <div class="scrollable-panel-body">
+          <div class="panel-header-block">
+            <span class="panel-tag">TICKET PLATFORM</span>
+            <span class="panel-status-badge">Academic Project</span>
+          </div>
+          <h2 class="text-white mb-3">PinoyTix</h2>
+          <p class="text-secondary">A ticket reservation platform made for local theatrical and cinematic screenings.</p>
+          <p class="text-secondary small">Users can browse event timings and select specific seats on an interactive map. JavaScript pulls data from the backend so seat availability updates instantly.</p>
+          
+          <div class="role-section">
+            <p class="role-title">// My Role</p>
+            <ul class="role-list">
+              <li>UI Design</li>
+              <li>Frontend Development</li>
+              <li>Database Design</li>
+            </ul>
+          </div>
+
+          <div class="my-4">
+            <span class="tech-chip"><span class="dot"></span>PHP</span>
+            <span class="tech-chip"><span class="dot"></span>REST API</span>
+            <span class="tech-chip"><span class="dot"></span>MySQL</span>
+            <span class="tech-chip"><span class="dot"></span>JavaScript</span>
+          </div>
+
+          <div class="related-bar">
+            <p class="small text-white mb-2">// Related Project Modules:</p>
+            <button class="btn btn-sm btn-outline-info me-2" onclick="switchPanel('panel-pinoytix', 'panel-ecommerce')">E-Commerce Store</button>
+            <button class="btn btn-sm btn-outline-info" onclick="switchPanel('panel-pinoytix', 'panel-bunnyhop')">Bunny Hop (Python)</button>
           </div>
         </div>
+      </div>
+    </div>
 
-        <div class="col-12 col-sm-6 col-md-3">
-          <div class="nm-card v-bracket-card" onclick="openPanel('panel-ecommerce')">
-            <div class="nm-card-preview" style="background-image: url('assets/ecommercewebsite.png');"></div>
-            <div class="nm-card-body">
-              <span class="nm-card-offer">PROJECT #03</span>
-              <div>
-                <h4 class="nm-card-title">E-Commerce</h4>
-                <p class="nm-card-tag">PHP + MySQL Backend</p>
-              </div>
-            </div>
+    <div id="panel-bunnyhop" class="info-panel">
+      <div class="panel-content v-bracket-card">
+        <div class="panel-back-row">
+          <button class="panel-back-btn" onclick="closePanel('panel-bunnyhop')"><i class="bi bi-arrow-left"></i> Back to Projects</button>
+          <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-bunnyhop')">Return to About Me</button>
+        </div>
+        <div class="scrollable-panel-body">
+          <div class="panel-header-block">
+            <span class="panel-tag">PYTHON GAME</span>
+            <span class="panel-status-badge">Completed Project</span>
+          </div>
+          <h2 class="text-white mb-3">Bunny Hop</h2>
+          <p class="text-secondary">A retro-inspired, 2D pixel arcade game where the goal is to guide a jumping bunny up a series of moving platforms.</p>
+          <p class="text-secondary small">Players must time their jumps perfectly, dodge obstacles, and collect carrots to beat their high score. The game uses custom code to handle gravity, platform landings, and real-time score tracking.</p>
+          
+          <div class="role-section">
+            <p class="role-title">// My Role</p>
+            <ul class="role-list">
+              <li>Game Logic</li>
+              <li>Level Design</li>
+              <li>Asset Integration</li>
+            </ul>
+          </div>
+
+          <div class="my-4">
+            <span class="tech-chip"><span class="dot"></span>Python</span>
+            <span class="tech-chip"><span class="dot"></span>Pygame</span>
+          </div>
+
+          <div class="related-bar">
+            <p class="small text-white mb-2">// Related Project Modules:</p>
+            <button class="btn btn-sm btn-outline-info" onclick="switchPanel('panel-bunnyhop', 'panel-portfolio')">Portfolio Base Structure</button>
           </div>
         </div>
+      </div>
+    </div>
 
-        <div class="col-12 col-sm-6 col-md-3">
-          <div class="nm-card v-bracket-card" onclick="openPanel('panel-portfolio')">
-            <div class="nm-card-preview" style="background-image: url('assets/personalwork.png');"></div>
-            <div class="nm-card-body">
-              <span class="nm-card-offer">PROJECT #04</span>
-              <div>
-                <h4 class="nm-card-title">Personal Portfolio</h4>
-                <p class="nm-card-tag">Bootstrap + Figma</p>
-              </div>
-            </div>
+    <div id="panel-ecommerce" class="info-panel">
+      <div class="panel-content v-bracket-card">
+        <div class="panel-back-row">
+          <button class="panel-back-btn" onclick="closePanel('panel-ecommerce')"><i class="bi bi-arrow-left"></i> Back to Projects</button>
+          <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-ecommerce')">Return to About Me</button>
+        </div>
+        <div class="scrollable-panel-body">
+          <div class="panel-header-block">
+            <span class="panel-tag">PHP + MYSQL BACKEND</span>
+            <span class="panel-status-badge">Active Project</span>
+          </div>
+          <h2 class="text-white mb-3">E-Commerce Store</h2>
+          <p class="text-secondary">A fully functional, storefront designed specifically for gaming gear and peripherals.</p>
+          <p class="text-secondary small">Includes user account creation, a dark catalog interface, and a working checkout — connecting a frontend layout directly to a database with PHP sessions for cart persistence.</p>
+          
+          <div class="role-section">
+            <p class="role-title">// My Role</p>
+            <ul class="role-list">
+              <li>UI Design</li>
+              <li>Frontend and Backend Development</li>
+              <li>Database</li>
+            </ul>
+          </div>
+
+          <div class="my-4">
+            <span class="tech-chip"><span class="dot"></span>PHP</span>
+            <span class="tech-chip"><span class="dot"></span>MySQL</span>
+            <span class="tech-chip"><span class="dot"></span>HTML5</span>
+            <span class="tech-chip"><span class="dot"></span>JavaScript</span>
+          </div>
+
+          <div class="related-bar">
+            <p class="small text-white mb-2">// Related Project Modules:</p>
+            <button class="btn btn-sm btn-outline-info" onclick="switchPanel('panel-ecommerce', 'panel-pinoytix')">PinoyTix App Module</button>
           </div>
         </div>
       </div>
-
     </div>
-  </section>
 
-  <div id="panel-pinoytix" class="info-panel">
-    <div class="panel-content v-bracket-card">
-      <div class="panel-back-row">
-        <button class="panel-back-btn" onclick="closePanel('panel-pinoytix')"><i class="bi bi-arrow-left"></i> Back to Projects</button>
-        <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-pinoytix')">Return to About Me</button>
-      </div>
-      <div class="scrollable-panel-body">
-        <div class="panel-header-block">
-          <span class="panel-tag">TICKET PLATFORM</span>
-          <span class="panel-status-badge">Academic Project</span>
+    <div id="panel-portfolio" class="info-panel">
+      <div class="panel-content v-bracket-card">
+        <div class="panel-back-row">
+          <button class="panel-back-btn" onclick="closePanel('panel-portfolio')"><i class="bi bi-arrow-left"></i> Back to Projects</button>
+          <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-portfolio')">Return to About Me</button>
         </div>
-        <h2 class="text-white mb-3">PinoyTix</h2>
-        <p class="text-secondary">A ticket reservation platform made for local theatrical and cinematic screenings.</p>
-        <p class="text-secondary small">Users can browse event timings and select specific seats on an interactive map. JavaScript pulls data from the backend so seat availability updates instantly.</p>
-        
-        <div class="role-section">
-          <p class="role-title">// My Role</p>
-          <ul class="role-list">
-            <li>UI Design</li>
-            <li>Frontend Development</li>
-            <li>Database Design</li>
-          </ul>
-        </div>
+        <div class="scrollable-panel-body">
+          <div class="panel-header-block">
+            <span class="panel-tag">BOOTSTRAP SPECS</span>
+            <span class="panel-status-badge">Personal Project</span>
+          </div>
+          <h2 class="text-white mb-3">Personal Portfolio Base</h2>
+          <p class="text-secondary">Designed and built this portfolio architecture to cleanly display student projects and structured design milestones.</p>
+          <p class="text-secondary small">In this environment, it highlights coding projects, academic timelines, and community milestones smoothly inside an interface container.</p>
+          
+          <div class="role-section">
+            <p class="role-title">// My Role</p>
+            <ul class="role-list">
+              <li>UI Design</li>
+              <li>Frontend Development</li>
+              <li>Figma Prototyping</li>
+            </ul>
+          </div>
 
-        <div class="my-4">
-          <span class="tech-chip"><span class="dot"></span>PHP</span>
-          <span class="tech-chip"><span class="dot"></span>REST API</span>
-          <span class="tech-chip"><span class="dot"></span>MySQL</span>
-          <span class="tech-chip"><span class="dot"></span>JavaScript</span>
-        </div>
-
-        <div class="related-bar">
-          <p class="small text-white mb-2">// Related Project Modules:</p>
-          <button class="btn btn-sm btn-outline-info me-2" onclick="switchPanel('panel-pinoytix', 'panel-ecommerce')">E-Commerce Store</button>
-          <button class="btn btn-sm btn-outline-info" onclick="switchPanel('panel-pinoytix', 'panel-bunnyhop')">Bunny Hop (Python)</button>
+          <div class="my-4">
+            <span class="tech-chip"><span class="dot"></span>Bootstrap</span>
+            <span class="tech-chip"><span class="dot"></span>Figma Specs</span>
+            <span class="tech-chip"><span class="dot"></span>HTML5</span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div id="panel-bunnyhop" class="info-panel">
-    <div class="panel-content v-bracket-card">
-      <div class="panel-back-row">
-        <button class="panel-back-btn" onclick="closePanel('panel-bunnyhop')"><i class="bi bi-arrow-left"></i> Back to Projects</button>
-        <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-bunnyhop')">Return to About Me</button>
-      </div>
-      <div class="scrollable-panel-body">
-        <div class="panel-header-block">
-          <span class="panel-tag">PYTHON GAME</span>
-          <span class="panel-status-badge">Completed Project</span>
-        </div>
-        <h2 class="text-white mb-3">Bunny Hop</h2>
-        <p class="text-secondary">A retro-inspired, 2D pixel arcade game where the goal is to guide a jumping bunny up a series of moving platforms.</p>
-        <p class="text-secondary small">Players must time their jumps perfectly, dodge obstacles, and collect carrots to beat their high score. The game uses custom code to handle gravity, platform landings, and real-time score tracking.</p>
-        
-        <div class="role-section">
-          <p class="role-title">// My Role</p>
-          <ul class="role-list">
-            <li>Game Logic</li>
-            <li>Level Design</li>
-            <li>Asset Integration</li>
-          </ul>
-        </div>
-
-        <div class="my-4">
-          <span class="tech-chip"><span class="dot"></span>Python</span>
-          <span class="tech-chip"><span class="dot"></span>Pygame</span>
-        </div>
-
-        <div class="related-bar">
-          <p class="small text-white mb-2">// Related Project Modules:</p>
-          <button class="btn btn-sm btn-outline-info" onclick="switchPanel('panel-bunnyhop', 'panel-portfolio')">Portfolio Base Structure</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="panel-ecommerce" class="info-panel">
-    <div class="panel-content v-bracket-card">
-      <div class="panel-back-row">
-        <button class="panel-back-btn" onclick="closePanel('panel-ecommerce')"><i class="bi bi-arrow-left"></i> Back to Projects</button>
-        <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-ecommerce')">Return to About Me</button>
-      </div>
-      <div class="scrollable-panel-body">
-        <div class="panel-header-block">
-          <span class="panel-tag">PHP + MYSQL BACKEND</span>
-          <span class="panel-status-badge">Active Project</span>
-        </div>
-        <h2 class="text-white mb-3">E-Commerce Store</h2>
-        <p class="text-secondary">A fully functional, storefront designed specifically for gaming gear and peripherals.</p>
-        <p class="text-secondary small">Includes user account creation, a dark catalog interface, and a working checkout — connecting a frontend layout directly to a database with PHP sessions for cart persistence.</p>
-        
-        <div class="role-section">
-          <p class="role-title">// My Role</p>
-          <ul class="role-list">
-            <li>UI Design</li>
-            <li>Frontend and Backend Development</li>
-            <li>Database</li>
-          </ul>
-        </div>
-
-        <div class="my-4">
-          <span class="tech-chip"><span class="dot"></span>PHP</span>
-          <span class="tech-chip"><span class="dot"></span>MySQL</span>
-          <span class="tech-chip"><span class="dot"></span>HTML5</span>
-          <span class="tech-chip"><span class="dot"></span>JavaScript</span>
-        </div>
-
-        <div class="related-bar">
-          <p class="small text-white mb-2">// Related Project Modules:</p>
-          <button class="btn btn-sm btn-outline-info" onclick="switchPanel('panel-ecommerce', 'panel-pinoytix')">PinoyTix App Module</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="panel-portfolio" class="info-panel">
-    <div class="panel-content v-bracket-card">
-      <div class="panel-back-row">
-        <button class="panel-back-btn" onclick="closePanel('panel-portfolio')"><i class="bi bi-arrow-left"></i> Back to Projects</button>
-        <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-portfolio')">Return to About Me</button>
-      </div>
-      <div class="scrollable-panel-body">
-        <div class="panel-header-block">
-          <span class="panel-tag">BOOTSTRAP SPECS</span>
-          <span class="panel-status-badge">Personal Project</span>
-        </div>
-        <h2 class="text-white mb-3">Personal Portfolio Base</h2>
-        <p class="text-secondary">Designed and built this portfolio architecture to cleanly display student projects and structured design milestones.</p>
-        <p class="text-secondary small">In this environment, it highlights coding projects, academic timelines, and community milestones smoothly inside an interface container.</p>
-        
-        <div class="role-section">
-          <p class="role-title">// My Role</p>
-          <ul class="role-list">
-            <li>UI Design</li>
-            <li>Frontend Development</li>
-            <li>Figma Prototyping</li>
-          </ul>
-        </div>
-
-        <div class="my-4">
-          <span class="tech-chip"><span class="dot"></span>Bootstrap</span>
-          <span class="tech-chip"><span class="dot"></span>Figma Specs</span>
-          <span class="tech-chip"><span class="dot"></span>HTML5</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // System Views Elements Cache
-    const screenLobby  = document.getElementById('hero-lobby');
-    const screenHub    = document.getElementById('about-me-hub');
-    const screenMarket = document.getElementById('night-market');
-
-    const enterBtn      = document.getElementById('enterBtn');
-    const backToLobbyBtn = document.getElementById('backToLobbyBtn');
-
-    // Root Screen Routing Engine
-    enterBtn.addEventListener('click', () => {
-      screenLobby.classList.remove('active');
-      screenHub.classList.add('active');
-    });
-
-    backToLobbyBtn.addEventListener('click', () => {
-      screenHub.classList.remove('active');
-      screenLobby.classList.add('active');
-    });
-
-    // Related panels jumps routing
-    function navigateToSection(targetId) {
-      screenHub.classList.remove('active');
-      screenMarket.classList.remove('active');
-      document.getElementById(targetId).classList.add('active');
-    }
-
-    // Modal Display Trigger Overrides
-    function openPanel(panelId) {
-      document.getElementById(panelId).classList.add('active');
-    }
-
-    // Related panels jumps routing
-    function closePanel(panelId) {
-      document.getElementById(panelId).classList.remove('active');
-    }
-
-    function closePanelAndGoHome(panelId) {
-      closePanel(panelId);
-      navigateToSection('about-me-hub');
-    }
-
-    // Related panels jumps routing
-    function switchPanel(currentPanelId, nextPanelId) {
-      closePanel(currentPanelId);
-      openPanel(nextPanelId);
-    }
-
-    // CONTINUOUS LIGHTWEIGHT TYPEWRITER ENGINE
-    const typewriterWords = ["IT Student", "Future Frontend Developer", "Future Pro Player"];
-    let wordIdx = 0;
-    let charIdx = 0;
-    let isDeletingChar = false;
-    const targetElement = document.getElementById("typewriter-text");
-
-    function runTypewriter() {
-      const currentWord = typewriterWords[wordIdx];
-      
-      if (!isDeletingChar) {
-        charIdx++;
-        targetElement.textContent = currentWord.slice(0, charIdx);
-        
-        if (charIdx === currentWord.length) {
-          isDeletingChar = true;
-          setTimeout(runTypewriter, 1800);
-          return;
-        }
-        setTimeout(runTypewriter, 90);
-      } else {
-        charIdx--;
-        targetElement.textContent = currentWord.slice(0, charIdx);
-        
-        if (charIdx === 0) {
-          isDeletingChar = false;
-          wordIdx = (wordIdx + 1) % typewriterWords.length;
-          setTimeout(runTypewriter, 400);
-          return;
-        }
-        setTimeout(runTypewriter, 50);
-      }
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      if (targetElement) runTypewriter();
-    });
-
-    // EmailJS Delivery Execution Handler
-    function sendMessage() {
-      const nameVal = document.getElementById("contact-name").value.trim();
-      const emailVal = document.getElementById("contact-email").value.trim();
-      const messageVal = document.getElementById("contact-message").value.trim();
-
-      if (!nameVal || !emailVal || !messageVal) {
-        alert("Please fill out all fields before sending.");
-        return;
-      }
-
-      const templateParams = {
-        from_name: nameVal,
-        from_email: emailVal,
-        message: messageVal
-      };
-
-      emailjs.send("service_portfolio", "template_contact", templateParams)
-        .then(function(response) {
-          alert("Message sent successfully!");
-          document.getElementById("contact-name").value = "";
-          document.getElementById("contact-email").value = "";
-          document.getElementById("contact-message").value = "";
-        }, function(error) {
-          alert("Failed to send. Please try again.");
-          console.error("EmailJS Execution Error Parameters:", error);
-        });
-    }
-  </script>
+  </div> <script src="assets/script.js"></script>
 
 </body>
 </html>
