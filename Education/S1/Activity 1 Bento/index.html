@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Focus sa Goal</title>
+  <!-- Bootstrap CSS v5.3.8 (layout uses the grid only: container, row, col-*, g-*) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=DM+Sans:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container py-4">
+
+    <header class="row align-items-end g-3 mb-3">
+      <div class="col-12 col-md-7">
+        <h1 id="greeting">Hello</h1>
+        <p id="today" class="muted m-0"></p>
+      </div>
+    </header>
+
+    <main class="row g-3">
+
+      <section class="col-12 col-md-6 col-lg-5" aria-labelledby="t-timer">
+        <div class="tile tile-timer">
+          <h2 id="t-timer">Focus timer</h2>
+          <div class="modes" role="group" aria-label="Timer mode">
+            <button data-mode="focus" aria-pressed="true">Focus 25</button>
+            <button data-mode="short" aria-pressed="false">Break 5</button>
+            <button data-mode="long" aria-pressed="false">Long break 15</button>
+          </div>
+          <div id="clock" class="clock" role="timer" aria-live="off">25:00</div>
+          <div class="track">
+            <div id="bar" class="fill"></div>
+          </div>
+          <div class="actions">
+            <button id="start" class="btn-main">Start</button>
+            <button id="reset" class="btn-ghost">Reset</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="col-12 col-md-6 col-lg-4" aria-labelledby="t-todo">
+        <div class="tile tile-todo">
+          <h2 id="t-todo">To-do today</h2>
+          <form id="todo-form" class="inline-form">
+            <input id="todo-in" type="text" placeholder="Add a task" aria-label="New task" required>
+            <button class="btn-main" type="submit">Add</button>
+          </form>
+          <ul id="todo-list" class="list"></ul>
+        </div>
+      </section>
+
+      <section class="col-12 col-md-6 col-lg-3" aria-labelledby="t-today">
+        <div class="tile tile-today">
+          <h2 id="t-today">Right now</h2>
+          <div id="now-time" class="big">--:--</div>
+          <p class="muted small mt-auto m-0">Quote of the day</p>
+          <p id="quote" class="quote"></p>
+          <form id="quote-form" class="inline-form m-0">
+            <input id="quote-in" type="text" maxlength="140" placeholder="Type today's quote"
+              aria-label="Quote of the day">
+            <button class="btn-main" type="submit">Save</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="col-12 col-md-6 col-lg-4" aria-labelledby="t-goals">
+        <div class="tile tile-goals">
+          <h2 id="t-goals">Goals</h2>
+          <form id="goal-form" class="inline-form">
+            <input id="goal-in" type="text" placeholder="Add a goal" aria-label="New goal" required>
+            <button class="btn-main" type="submit">Add</button>
+          </form>
+          <ul id="goal-list" class="list"></ul>
+        </div>
+      </section>
+
+      <section class="col-12 col-md-6 col-lg-5" aria-labelledby="t-music">
+        <div class="tile tile-music">
+          <h2 id="t-music">Study playlist</h2>
+          <iframe id="player" title="Spotify playlist" loading="lazy" allow="encrypted-media"
+            src="https://open.spotify.com/embed/playlist/37i9dQZF1DWWQRwui0ExPn"></iframe>
+          <form id="music-form" class="inline-form">
+            <input id="music-in" type="url" placeholder="Paste a Spotify playlist link"
+              aria-label="Spotify playlist link">
+            <button class="btn-ghost" type="submit">Change</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="col-12 col-md-6 col-lg-3" aria-label="Featured image">
+        <div class="tile tile-art">
+          <img src="images/star.jpg" loading="lazy"
+            alt="Black and white manga panel of a climber on a snowy slope under a glowing white wing, with the words: to become a star you must burn">
+        </div>
+      </section>
+
+    </main>
+  </div>
+  <!-- Bootstrap JavaScript Bundle (includes Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
