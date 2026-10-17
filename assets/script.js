@@ -1,7 +1,6 @@
 // System Views Elements Cache
     const screenLobby  = document.getElementById('hero-lobby');
     const screenHub    = document.getElementById('about-me-hub');
-    const screenMarket = document.getElementById('night-market');
     const globalHeader = document.getElementById('globalHeader');
 
     const enterBtn      = document.getElementById('enterBtn');
@@ -15,6 +14,12 @@
       });
     }
 
+    function hideAllSections() {
+      document.querySelectorAll('.view-section.active').forEach(section => {
+        section.classList.remove('active');
+      });
+    }
+
     // Root Screen Routing Engine
     enterBtn.addEventListener('click', () => {
       closeAllPanels();
@@ -25,8 +30,7 @@
 
     backToLobbyBtn.addEventListener('click', () => {
       closeAllPanels();
-      screenHub.classList.remove('active');
-      screenMarket.classList.remove('active');
+      hideAllSections();
       screenLobby.classList.add('active');
       globalHeader.classList.remove('visible');
     });
@@ -34,9 +38,7 @@
     // Related panels jumps routing
     function navigateToSection(targetId) {
       closeAllPanels();
-      screenLobby.classList.remove('active');
-      screenHub.classList.remove('active');
-      screenMarket.classList.remove('active');
+      hideAllSections();
       document.getElementById(targetId).classList.add('active');
       if (targetId === 'about-me-hub') resetLobbyTab();
     }

@@ -1,0 +1,289 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box
+}
+
+:root {
+  --bg: #1c1d1f;
+  --text: #e6e8ea;
+  --muted: #9aa1a6;
+  --line: #ffffff1f;
+  --timer: #303337;
+  --todo: #26282b;
+  --goals: #222c28;
+  --music: #2e2b23;
+  --today: #222a33;
+  --mint: #8fd4b4;
+  --on-mint: #10201a;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "DM Sans", system-ui, sans-serif;
+  line-height: 1.5
+}
+
+h1,
+h2,
+.big,
+.clock {
+  font-family: "Bricolage Grotesque", "DM Sans", system-ui, sans-serif
+}
+
+h1 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -.02em
+}
+
+h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 .85rem
+}
+
+.muted {
+  color: var(--muted) !important
+}
+
+/* Tiles: same grid, different weight */
+.tile {
+  height: 100%;
+  min-height: 15rem;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px
+}
+
+.tile-timer {
+  background: var(--timer);
+  border-radius: 32px;
+  min-height: 24rem;
+  padding: 1.75rem
+}
+
+.tile-todo {
+  background: var(--todo);
+  border-radius: 24px
+}
+
+.tile-today {
+  background: var(--today)
+}
+
+.tile-goals {
+  background: var(--goals);
+  border-radius: 24px
+}
+
+.tile-music {
+  background: var(--music);
+  border-radius: 28px
+}
+
+.tile-art {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  min-height: 20rem;
+  background: #000;
+  border-radius: 28px
+}
+
+.tile-art img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center
+}
+
+.big {
+  font-size: 3.25rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.03em;
+  margin-bottom: .35rem
+}
+
+.quote {
+  font-weight: 500;
+  overflow-wrap: anywhere;
+  margin: .15rem 0 .85rem
+}
+
+/* Timer */
+.modes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem
+}
+
+.modes button {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid #555a60;
+  border-radius: 999px;
+  padding: .35rem .9rem;
+  font: inherit;
+  font-size: .875rem
+}
+
+.modes button[aria-pressed="true"] {
+  background: var(--mint);
+  color: var(--on-mint);
+  border-color: var(--mint)
+}
+
+.clock {
+  font-size: clamp(4rem, 12vw, 6.5rem);
+  font-weight: 700;
+  letter-spacing: -.04em;
+  line-height: 1;
+  margin: auto 0 1rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--mint)
+}
+
+.track {
+  height: 8px;
+  background: #ffffff1f;
+  border-radius: 99px;
+  overflow: hidden
+}
+
+.fill {
+  height: 100%;
+  width: 0;
+  background: var(--mint);
+  transition: width .4s linear
+}
+
+.actions {
+  display: flex;
+  gap: .6rem;
+  margin-top: 1.25rem
+}
+
+/* Buttons + inputs */
+button {
+  font: inherit
+}
+
+.btn-main,
+.btn-ghost {
+  border-radius: 12px;
+  padding: .5rem 1.1rem;
+  border: 1px solid transparent;
+  font-weight: 500
+}
+
+.btn-main {
+  background: var(--mint);
+  color: var(--on-mint)
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: #555a60
+}
+
+.inline-form {
+  display: flex;
+  gap: .5rem;
+  margin-bottom: .85rem
+}
+
+input[type="text"],
+input[type="url"] {
+  flex: 1;
+  min-width: 0;
+  padding: .5rem .75rem;
+  border: 1px solid #484c51;
+  border-radius: 12px;
+  background: #17181a;
+  color: var(--text);
+  font: inherit
+}
+
+input::placeholder {
+  color: #7b8288
+}
+
+:focus-visible {
+  outline: 3px solid #8db8e6;
+  outline-offset: 2px
+}
+
+/* Lists (to-do and goals share this) */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  max-height: 15rem
+}
+
+.list li {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .45rem 0;
+  border-bottom: 1px solid var(--line)
+}
+
+.list li:last-child {
+  border-bottom: 0
+}
+
+.list .txt {
+  flex: 1;
+  overflow-wrap: anywhere
+}
+
+.done .txt {
+  text-decoration: line-through;
+  color: var(--muted)
+}
+
+.icon {
+  background: none;
+  border: 0;
+  color: var(--muted);
+  padding: .25rem .5rem;
+  border-radius: 8px
+}
+
+.icon:hover {
+  background: #ffffff14;
+  color: var(--text)
+}
+
+.empty {
+  color: var(--muted);
+  font-size: .9rem;
+  padding: .5rem 0
+}
+
+/* Music */
+iframe {
+  width: 100%;
+  height: 232px;
+  border: 0;
+  border-radius: 14px;
+  margin-bottom: .85rem;
+  color-scheme: normal
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .fill {
+    transition: none
+  }
+}

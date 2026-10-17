@@ -28,6 +28,7 @@
     <div class="lobby-tabs">
       <button class="lobby-tab active" data-tab="home" onclick="setLobbyTab(this); navigateToSection('about-me-hub')">About Me</button>
       <button class="lobby-tab" onclick="setLobbyTab(this); navigateToSection('night-market')">Projects</button>
+      <button class="lobby-tab" onclick="setLobbyTab(this); navigateToSection('activities')">Activities</button>
       <button class="lobby-tab" onclick="setLobbyTab(this); openPanel('panel-education')">Education</button>
       <button class="lobby-tab" onclick="setLobbyTab(this); openPanel('panel-academics')">Academics</button>
       <button class="lobby-tab" onclick="setLobbyTab(this); openPanel('panel-esports')">ESPORTS</button>
@@ -490,6 +491,61 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="activities" class="view-section">
+      <div class="container act-container">
+
+        <div class="nm-header">
+          <p class="nm-eyebrow">// ACTIVITIES</p>
+          <button class="btn-return-hub" onclick="navigateToSection('about-me-hub')">Return to About Me</button>
+        </div>
+
+        <button class="act-category v-bracket-card" onclick="navigateToSection('web-dev-activities')">
+          <span class="act-category-text">
+            <span class="act-category-title">Web Dev Activities</span>
+            <span class="act-category-meta">Layout and front-end exercises from class</span>
+          </span>
+          <span class="act-category-count">1 available</span>
+          <i class="bi bi-caret-right"></i>
+        </button>
+
+      </div>
+    </section>
+
+    <section id="web-dev-activities" class="view-section">
+      <div class="container act-container">
+
+        <div class="nm-header">
+          <p class="nm-eyebrow">// WEB DEV ACTIVITIES</p>
+          <button class="btn-return-hub" onclick="navigateToSection('activities')">Back to Activities</button>
+        </div>
+
+        <div class="act-list">
+          <a class="act-row v-bracket-card" href="Education/Activities/Bento/index.html" target="_blank" rel="noopener">
+            <span class="act-row-main">
+              <span class="act-row-title">Bento Layout</span>
+              <span class="act-row-desc">A bento-style dashboard with a focus timer, to-do list, goals, and a study playlist.</span>
+              <span class="act-row-tags">
+                <span class="tech-chip"><span class="dot"></span>HTML5</span>
+                <span class="tech-chip"><span class="dot"></span>CSS3</span>
+                <span class="tech-chip"><span class="dot"></span>Bootstrap</span>
+                <span class="tech-chip"><span class="dot"></span>JavaScript</span>
+              </span>
+            </span>
+            <span class="act-row-action">Open <i class="bi bi-box-arrow-up-right"></i></span>
+          </a>
+
+          <div class="act-row act-row-upcoming">
+            <span class="act-row-main">
+              <span class="act-row-title">More activities</span>
+              <span class="act-row-desc">New web dev activities will appear here as I finish them.</span>
+            </span>
+            <span class="act-row-action">Coming soon</span>
           </div>
         </div>
 
