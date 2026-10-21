@@ -1,32 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mark Justin Tria | Portfolio</title>
   <link rel="icon" type="image/png" href="assets/MAKU (1).png" />
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
 
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet" />
 
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script type="text/javascript">
-    (function() {
+    (function () {
       emailjs.init({
         publicKey: "FwbKUouUaxwO5YLUl",
       });
     })();
   </script>
 
-  <link rel="stylesheet" href="assets/style.css"/>
+  <link rel="stylesheet" href="assets/style.css" />
 </head>
+
 <body>
 
   <header class="global-tab-header" id="globalHeader">
     <div class="lobby-tabs">
-      <button class="lobby-tab active" data-tab="home" onclick="setLobbyTab(this); navigateToSection('about-me-hub')">About Me</button>
+      <button class="lobby-tab active" data-tab="home"
+        onclick="setLobbyTab(this); navigateToSection('about-me-hub')">About Me</button>
       <button class="lobby-tab" onclick="setLobbyTab(this); navigateToSection('night-market')">Projects</button>
       <button class="lobby-tab" onclick="setLobbyTab(this); navigateToSection('activities')">Activities</button>
       <button class="lobby-tab" onclick="setLobbyTab(this); openPanel('panel-education')">Education</button>
@@ -34,7 +39,8 @@
       <button class="lobby-tab" onclick="setLobbyTab(this); openPanel('panel-esports')">ESPORTS</button>
       <button class="lobby-tab" onclick="setLobbyTab(this); openPanel('panel-contact')">Contact Me</button>
     </div>
-    <button class="lobby-back-corner" id="backToLobbyBtn"><i class="bi bi-caret-left"></i><span class="back-label">Back to Lobby</span></button>
+    <button class="lobby-back-corner" id="backToLobbyBtn"><i class="bi bi-caret-left"></i><span class="back-label">Back
+        to Lobby</span></button>
   </header>
 
   <div class="screens-viewport">
@@ -58,17 +64,18 @@
 
     <section id="about-me-hub" class="view-section">
       <div class="hub-scroll-container">
-        
+
         <div class="row align-items-center g-4 profile-section-wrapper">
           <div class="col-md-3 text-start">
-            <img src="assets/makuformal.png" alt="Mark Justin Tria" class="profile-frame"/>
+            <img src="assets/makuformal.png" alt="Mark Justin Tria" class="profile-frame" />
           </div>
           <div class="col-md-9 text-start">
             <h1 class="hub-name">Mark Justin Tria</h1>
             <p class="hub-sub-line"><span id="typewriter-text"></span><span class="typewriter-cursor">|</span></p>
             <p class="personal-quote">"Every project teaches something new."</p>
             <p class="hub-intro">
-              Hi! I'm a 2nd-year IT student at Polytechnic University of the Philippines – Sto. Tomas who loves to learn and explore the world of web development. Outside of school, I enjoy playing online games and travelling.
+              Hi! I'm a 2nd-year IT student at Polytechnic University of the Philippines – Sto. Tomas who loves to learn
+              and explore the world of web development. Outside of school, I enjoy playing online games and travelling.
             </p>
           </div>
         </div>
@@ -132,19 +139,30 @@
           <div class="logo-carousel-track-wrap">
             <div class="logo-carousel-track">
               <div class="logo-carousel-item"><img src="assets/logo-vscode.png" alt="VS Code"><span>VS Code</span></div>
-              <div class="logo-carousel-item"><img src="assets/logo-lol.png" alt="League of Legends"><span>League of Legends</span></div>
-              <div class="logo-carousel-item"><img src="assets/logo-valorant.png" alt="Valorant"><span>Valorant</span></div>
-              <div class="logo-carousel-item"><img src="assets/logo-mlbb.png" alt="Mobile Legends"><span>Mobile Legends</span></div>
-              <div class="logo-carousel-item"><img src="assets/logo-syntaxerror.jpg" alt="Syntax Error"><span>Syntax Error</span></div>
+              <div class="logo-carousel-item"><img src="assets/logo-lol.png" alt="League of Legends"><span>League of
+                  Legends</span></div>
+              <div class="logo-carousel-item"><img src="assets/logo-valorant.png" alt="Valorant"><span>Valorant</span>
+              </div>
+              <div class="logo-carousel-item"><img src="assets/logo-mlbb.png" alt="Mobile Legends"><span>Mobile
+                  Legends</span></div>
+              <div class="logo-carousel-item"><img src="assets/logo-syntaxerror.jpg" alt="Syntax Error"><span>Syntax
+                  Error</span></div>
               <div class="logo-carousel-item"><img src="assets/logo-xampp.png" alt="XAMPP"><span>XAMPP</span></div>
               <div class="logo-carousel-item"><img src="assets/logo-figma.png" alt="Figma"><span>Figma</span></div>
-              <div class="logo-carousel-item" aria-hidden="true"><img src="assets/logo-vscode.png" alt=""><span>VS Code</span></div>
-              <div class="logo-carousel-item" aria-hidden="true"><img src="assets/logo-lol.png" alt=""><span>League of Legends</span></div>
-              <div class="logo-carousel-item" aria-hidden="true"><img src="assets/logo-valorant.png" alt=""><span>Valorant</span></div>
-              <div class="logo-carousel-item" aria-hidden="true"><img src="assets/logo-mlbb.png" alt=""><span>Mobile Legends</span></div>
-              <div class="logo-carousel-item" aria-hidden="true"><img src="assets/logo-syntaxerror.jpg" alt=""><span>Syntax Error</span></div>
-              <div class="logo-carousel-item" aria-hidden="true"><img src="assets/logo-xampp.png" alt=""><span>XAMPP</span></div>
-              <div class="logo-carousel-item" aria-hidden="true"><img src="assets/logo-figma.png" alt=""><span>Figma</span></div>
+              <div class="logo-carousel-item" aria-hidden="true"><img src="assets/logo-vscode.png" alt=""><span>VS
+                  Code</span></div>
+              <div class="logo-carousel-item" aria-hidden="true"><img src="assets/logo-lol.png" alt=""><span>League of
+                  Legends</span></div>
+              <div class="logo-carousel-item" aria-hidden="true"><img src="assets/logo-valorant.png"
+                  alt=""><span>Valorant</span></div>
+              <div class="logo-carousel-item" aria-hidden="true"><img src="assets/logo-mlbb.png" alt=""><span>Mobile
+                  Legends</span></div>
+              <div class="logo-carousel-item" aria-hidden="true"><img src="assets/logo-syntaxerror.jpg"
+                  alt=""><span>Syntax Error</span></div>
+              <div class="logo-carousel-item" aria-hidden="true"><img src="assets/logo-xampp.png"
+                  alt=""><span>XAMPP</span></div>
+              <div class="logo-carousel-item" aria-hidden="true"><img src="assets/logo-figma.png"
+                  alt=""><span>Figma</span></div>
             </div>
           </div>
         </div>
@@ -169,7 +187,7 @@
               </ul>
             </div>
           </div>
-        </div>  
+        </div>
 
       </div>
     </section>
@@ -177,8 +195,10 @@
     <div id="panel-esports" class="info-panel">
       <div class="panel-content v-bracket-card">
         <div class="panel-back-row">
-          <button class="panel-back-btn" onclick="closePanel('panel-esports')"><i class="bi bi-caret-left"></i> Close Panel</button>
-          <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-esports')">Return to About Me</button>
+          <button class="panel-back-btn" onclick="closePanel('panel-esports')"><i class="bi bi-caret-left"></i> Close
+            Panel</button>
+          <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-esports')">Return to About
+            Me</button>
         </div>
         <div class="scrollable-panel-body">
           <div class="panel-header-block">
@@ -191,40 +211,68 @@
               <div class="row g-3">
                 <div class="col-md-4">
                   <div class="v-bracket-card" style="height: 100%; display: flex; flex-direction: column;">
-                    <div style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
-                      <img src="assets/MSL CHAMP.jpg" alt="MSL Champion" style="max-width: 100%; max-height: 100%; object-fit: cover;">
+                    <div
+                      style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
+                      <img src="assets/MSL CHAMP.jpg" alt="MSL Champion"
+                        style="max-width: 100%; max-height: 100%; object-fit: cover;">
                     </div>
                     <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column;">
-                      <span style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Achievement #01</span>
-                      <h4 style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">Champion</h4>
-                      <p style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">MSL Regional Match Bracket</p>
-                      <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">Won the regional tournament through teamwork, communication, and consistent performance throughout the competition.</p>
+                      <span
+                        style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Achievement
+                        #01</span>
+                      <h4
+                        style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">
+                        Champion</h4>
+                      <p
+                        style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">
+                        MSL Regional Match Bracket</p>
+                      <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">Won the
+                        regional tournament through teamwork, communication, and consistent performance throughout the
+                        competition.</p>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="v-bracket-card" style="height: 100%; display: flex; flex-direction: column;">
-                    <div style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
-                      <img src="assets/PCC.jpg" alt="PCC 6th Place" style="max-width: 100%; max-height: 100%; object-fit: cover;">
+                    <div
+                      style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
+                      <img src="assets/PCC.jpg" alt="PCC 6th Place"
+                        style="max-width: 100%; max-height: 100%; object-fit: cover;">
                     </div>
                     <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column;">
-                      <span style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Achievement #02</span>
-                      <h4 style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">6th Place</h4>
-                      <p style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">PCC Tournament</p>
-                      <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">Finished in the Top 6 among multiple competing teams in a highly competitive tournament.</p>
+                      <span
+                        style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Achievement
+                        #02</span>
+                      <h4
+                        style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">
+                        6th Place</h4>
+                      <p
+                        style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">
+                        PCC Tournament</p>
+                      <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">Finished in
+                        the Top 6 among multiple competing teams in a highly competitive tournament.</p>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="v-bracket-card" style="height: 100%; display: flex; flex-direction: column;">
-                    <div style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
-                      <img src="assets/2nd Place.jpg" alt="2nd Place" style="max-width: 100%; max-height: 100%; object-fit: cover;">
+                    <div
+                      style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
+                      <img src="assets/2nd Place.jpg" alt="2nd Place"
+                        style="max-width: 100%; max-height: 100%; object-fit: cover;">
                     </div>
                     <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column;">
-                      <span style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Achievement #03</span>
-                      <h4 style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">2nd Place</h4>
-                      <p style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">MLBB Campus Tournament</p>
-                      <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">Reached the finals and secured 2nd place after competing against strong teams from the campus.</p>
+                      <span
+                        style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Achievement
+                        #03</span>
+                      <h4
+                        style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">
+                        2nd Place</h4>
+                      <p
+                        style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">
+                        MLBB Campus Tournament</p>
+                      <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">Reached the
+                        finals and secured 2nd place after competing against strong teams from the campus.</p>
                     </div>
                   </div>
                 </div>
@@ -234,7 +282,7 @@
             <div class="esports-team-col">
               <p class="section-eyebrow">// My Esports Team</p>
               <div class="team-roster-scroll">
-                
+
                 <div class="team-player-card">
                   <div class="team-player-avatar">
                     <img src="assets/jul.jpg" alt="Player 01" class="player-img">
@@ -305,14 +353,17 @@
     <div id="panel-education" class="info-panel">
       <div class="panel-content v-bracket-card">
         <div class="panel-back-row">
-          <button class="panel-back-btn" onclick="closePanel('panel-education')"><i class="bi bi-caret-left"></i> Close Panel</button>
-          <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-education')">Return to About Me</button>
+          <button class="panel-back-btn" onclick="closePanel('panel-education')"><i class="bi bi-caret-left"></i> Close
+            Panel</button>
+          <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-education')">Return to About
+            Me</button>
         </div>
         <div class="scrollable-panel-body">
           <div class="row g-4">
             <div class="col-12">
               <h4 class="text-white mb-1">Academic Roadmap</h4>
-              <p class="text-white small mb-3" style="font-size: 0.85rem;">BS Information Technology — 2024 – Present</p>
+              <p class="text-white small mb-3" style="font-size: 0.85rem;">BS Information Technology — 2024 – Present
+              </p>
               <div class="vertical-timeline">
                 <div class="timeline-node">
                   <p class="timeline-year">2024-ONGOING</p>
@@ -348,8 +399,10 @@
     <div id="panel-academics" class="info-panel">
       <div class="panel-content v-bracket-card">
         <div class="panel-back-row">
-          <button class="panel-back-btn" onclick="closePanel('panel-academics')"><i class="bi bi-caret-left"></i> Close Panel</button>
-          <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-academics')">Return to About Me</button>
+          <button class="panel-back-btn" onclick="closePanel('panel-academics')"><i class="bi bi-caret-left"></i> Close
+            Panel</button>
+          <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-academics')">Return to About
+            Me</button>
         </div>
         <div class="scrollable-panel-body">
           <div class="panel-header-block">
@@ -360,40 +413,69 @@
           <div class="row g-3">
             <div class="col-md-4">
               <div class="v-bracket-card" style="height: 100%; display: flex; flex-direction: column;">
-                <div style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
-                  <img src="assets/Certificate.png" alt="Cisco Packet Tracer Certificate" style="max-width: 100%; max-height: 100%; object-fit: cover;">
+                <div
+                  style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
+                  <img src="assets/Certificate.png" alt="Cisco Packet Tracer Certificate"
+                    style="max-width: 100%; max-height: 100%; object-fit: cover;">
                 </div>
                 <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column;">
-                  <span style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Certificate #01</span>
-                  <h4 style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">Cisco Certificate</h4>
-                  <p style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">Welcome to Cisco Packet Tracer</p>
-                  <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">Completed the introductory Cisco Packet Tracer course, covering the basics of network simulation and device configuration.</p>
+                  <span
+                    style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Certificate
+                    #01</span>
+                  <h4
+                    style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">
+                    Cisco Certificate</h4>
+                  <p
+                    style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">
+                    Welcome to Cisco Packet Tracer</p>
+                  <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">Completed the
+                    introductory Cisco Packet Tracer course, covering the basics of network simulation and device
+                    configuration.</p>
                 </div>
               </div>
             </div>
             <div class="col-md-4">
               <div class="v-bracket-card" style="height: 100%; display: flex; flex-direction: column;">
-                <div style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
-                  <img src="assets/origami.jpg" alt="Origami Project" style="max-width: 100%; max-height: 100%; object-fit: cover;">
+                <div
+                  style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
+                  <img src="assets/origami.jpg" alt="Origami Project"
+                    style="max-width: 100%; max-height: 100%; object-fit: cover;">
                 </div>
                 <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column;">
-                  <span style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Project #01</span>
-                  <h4 style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">Origami Project</h4>
-                  <p style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">Group Activity</p>
-                  <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">A hands-on origami activity made with classmates, practicing patience, precision, and teamwork outside of code.</p>
+                  <span
+                    style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Project
+                    #01</span>
+                  <h4
+                    style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">
+                    Origami Project</h4>
+                  <p
+                    style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">
+                    Group Activity</p>
+                  <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">A hands-on
+                    origami activity made with classmates, practicing patience, precision, and teamwork outside of code.
+                  </p>
                 </div>
               </div>
             </div>
             <div class="col-md-4">
               <div class="v-bracket-card" style="height: 100%; display: flex; flex-direction: column;">
-                <div style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
-                  <img src="assets/CallingCard.png" alt="Calling Card" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                <div
+                  style="height: 160px; background-color: var(--v-bg); border-bottom: 1px solid var(--v-border); display: flex; align-items: center; justify-content: center;">
+                  <img src="assets/CallingCard.png" alt="Calling Card"
+                    style="max-width: 100%; max-height: 100%; object-fit: contain;">
                 </div>
                 <div style="padding: 16px; flex-grow: 1; display: flex; flex-direction: column;">
-                  <span style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Project #02</span>
-                  <h4 style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">Calling Card</h4>
-                  <p style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">Personal Branding</p>
-                  <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">My own calling card design, made as a class requirement to practice layout and personal branding basics.</p>
+                  <span
+                    style="font-family: 'Rajdhani', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; color: var(--v-red); text-transform: uppercase; margin-bottom: 4px; display: block;">Project
+                    #02</span>
+                  <h4
+                    style="font-size: 1.3rem; color: var(--v-text-pri); margin: 0 0 2px 0; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; font-weight: 700;">
+                    Calling Card</h4>
+                  <p
+                    style="font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 600; color: var(--v-text-mut); text-transform: uppercase; margin: 0 0 8px 0;">
+                    Personal Branding</p>
+                  <p style="color: var(--v-text-mut); font-size: 0.85rem; margin: 0; line-height: 1.4;">My own calling
+                    card design, made as a class requirement to practice layout and personal branding basics.</p>
                 </div>
               </div>
             </div>
@@ -405,8 +487,10 @@
     <div id="panel-contact" class="info-panel">
       <div class="panel-content v-bracket-card">
         <div class="panel-back-row">
-          <button class="panel-back-btn" onclick="closePanel('panel-contact')"><i class="bi bi-caret-left"></i> Close Panel</button>
-          <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-contact')">Return to About Me</button>
+          <button class="panel-back-btn" onclick="closePanel('panel-contact')"><i class="bi bi-caret-left"></i> Close
+            Panel</button>
+          <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-contact')">Return to About
+            Me</button>
         </div>
         <h3 class="text-white mb-4">Contact Gateway</h3>
         <div class="scrollable-panel-body">
@@ -433,7 +517,7 @@
 
     <section id="night-market" class="view-section">
       <div class="container" style="max-width: 1000px;">
-        
+
         <div class="nm-header">
           <p class="nm-eyebrow">// LATEST PROJECTS</p>
           <button class="btn-return-hub" onclick="navigateToSection('about-me-hub')">Return to About Me</button>
@@ -529,7 +613,8 @@
           <a class="act-row v-bracket-card" href="Activities/Bento/index.html" target="_blank" rel="noopener">
             <span class="act-row-main">
               <span class="act-row-title">Bento Layout</span>
-              <span class="act-row-desc">A bento-style dashboard with a focus timer, to-do list, goals, and a study playlist.</span>
+              <span class="act-row-desc">A bento-style dashboard with a focus timer, to-do list, goals, and a study
+                playlist.</span>
               <span class="act-row-tags">
                 <span class="tech-chip"><span class="dot"></span>HTML5</span>
                 <span class="tech-chip"><span class="dot"></span>CSS3</span>
@@ -540,6 +625,24 @@
             <span class="act-row-action">Open <i class="bi bi-box-arrow-up-right"></i></span>
           </a>
 
+          <div class="act-list">
+            <a class="act-row v-bracket-card" href="Activities/CafeJSON/index.html" target="_blank" rel="noopener">
+              <span class="act-row-main">
+                <span class="act-row-title">JSON Activity (Cafe)</span>
+                <span class="act-row-desc">A Comfy Cafe Themed Website.</span>
+                <span class="act-row-tags">
+                  <span class="tech-chip"><span class="dot"></span>HTML5</span>
+                  <span class="tech-chip"><span class="dot"></span>CSS3</span>
+                  <span class="tech-chip"><span class="dot"></span>Bootstrap</span>
+                  <span class="tech-chip"><span class="dot"></span>JavaScript</span>
+                  <span class="tech-chip"><span class="dot"></span>JSON</span>
+
+                </span>
+              </span>
+              <span class="act-row-action">Open <i class="bi bi-box-arrow-up-right"></i></span>
+            </a>
+
+          </div>
           <div class="act-row act-row-upcoming">
             <span class="act-row-main">
               <span class="act-row-title">More activities</span>
@@ -555,8 +658,10 @@
     <div id="panel-pinoytix" class="info-panel">
       <div class="panel-content v-bracket-card">
         <div class="panel-back-row">
-          <button class="panel-back-btn" onclick="closePanel('panel-pinoytix')"><i class="bi bi-caret-left"></i> Back to Projects</button>
-          <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-pinoytix')">Return to About Me</button>
+          <button class="panel-back-btn" onclick="closePanel('panel-pinoytix')"><i class="bi bi-caret-left"></i> Back to
+            Projects</button>
+          <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-pinoytix')">Return to About
+            Me</button>
         </div>
         <div class="scrollable-panel-body">
           <div class="panel-header-block">
@@ -564,9 +669,11 @@
             <span class="panel-status-badge">Academic Project</span>
           </div>
           <h2 class="text-white mb-3">PinoyTix</h2>
-          <p class="text-secondary">A ticket reservation platform made for local theatrical and cinematic screenings.</p>
-          <p class="text-secondary small">Users can browse event timings and select specific seats on an interactive map. JavaScript pulls data from the backend so seat availability updates instantly.</p>
-          
+          <p class="text-secondary">A ticket reservation platform made for local theatrical and cinematic screenings.
+          </p>
+          <p class="text-secondary small">Users can browse event timings and select specific seats on an interactive
+            map. JavaScript pulls data from the backend so seat availability updates instantly.</p>
+
           <div class="role-section">
             <p class="role-title">// My Role</p>
             <ul class="role-list">
@@ -585,8 +692,10 @@
 
           <div class="related-bar">
             <p class="small text-white mb-2">// Related Project Modules:</p>
-            <button class="btn btn-sm btn-outline-info me-2" onclick="switchPanel('panel-pinoytix', 'panel-ecommerce')">E-Commerce Store</button>
-            <button class="btn btn-sm btn-outline-info" onclick="switchPanel('panel-pinoytix', 'panel-bunnyhop')">Bunny Hop (Python)</button>
+            <button class="btn btn-sm btn-outline-info me-2"
+              onclick="switchPanel('panel-pinoytix', 'panel-ecommerce')">E-Commerce Store</button>
+            <button class="btn btn-sm btn-outline-info" onclick="switchPanel('panel-pinoytix', 'panel-bunnyhop')">Bunny
+              Hop (Python)</button>
           </div>
         </div>
       </div>
@@ -595,8 +704,10 @@
     <div id="panel-bunnyhop" class="info-panel">
       <div class="panel-content v-bracket-card">
         <div class="panel-back-row">
-          <button class="panel-back-btn" onclick="closePanel('panel-bunnyhop')"><i class="bi bi-caret-left"></i> Back to Projects</button>
-          <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-bunnyhop')">Return to About Me</button>
+          <button class="panel-back-btn" onclick="closePanel('panel-bunnyhop')"><i class="bi bi-caret-left"></i> Back to
+            Projects</button>
+          <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-bunnyhop')">Return to About
+            Me</button>
         </div>
         <div class="scrollable-panel-body">
           <div class="panel-header-block">
@@ -604,9 +715,12 @@
             <span class="panel-status-badge">Completed Project</span>
           </div>
           <h2 class="text-white mb-3">Bunny Hop</h2>
-          <p class="text-secondary">A retro-inspired, 2D pixel arcade game where the goal is to guide a jumping bunny up a series of moving platforms.</p>
-          <p class="text-secondary small">Players must time their jumps perfectly, dodge obstacles, and collect carrots to beat their high score. The game uses custom code to handle gravity, platform landings, and real-time score tracking.</p>
-          
+          <p class="text-secondary">A retro-inspired, 2D pixel arcade game where the goal is to guide a jumping bunny up
+            a series of moving platforms.</p>
+          <p class="text-secondary small">Players must time their jumps perfectly, dodge obstacles, and collect carrots
+            to beat their high score. The game uses custom code to handle gravity, platform landings, and real-time
+            score tracking.</p>
+
           <div class="role-section">
             <p class="role-title">// My Role</p>
             <ul class="role-list">
@@ -623,7 +737,8 @@
 
           <div class="related-bar">
             <p class="small text-white mb-2">// Related Project Modules:</p>
-            <button class="btn btn-sm btn-outline-info" onclick="switchPanel('panel-bunnyhop', 'panel-portfolio')">Portfolio Base Structure</button>
+            <button class="btn btn-sm btn-outline-info"
+              onclick="switchPanel('panel-bunnyhop', 'panel-portfolio')">Portfolio Base Structure</button>
           </div>
         </div>
       </div>
@@ -632,8 +747,10 @@
     <div id="panel-ecommerce" class="info-panel">
       <div class="panel-content v-bracket-card">
         <div class="panel-back-row">
-          <button class="panel-back-btn" onclick="closePanel('panel-ecommerce')"><i class="bi bi-caret-left"></i> Back to Projects</button>
-          <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-ecommerce')">Return to About Me</button>
+          <button class="panel-back-btn" onclick="closePanel('panel-ecommerce')"><i class="bi bi-caret-left"></i> Back
+            to Projects</button>
+          <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-ecommerce')">Return to About
+            Me</button>
         </div>
         <div class="scrollable-panel-body">
           <div class="panel-header-block">
@@ -641,9 +758,11 @@
             <span class="panel-status-badge">Active Project</span>
           </div>
           <h2 class="text-white mb-3">E-Commerce Store</h2>
-          <p class="text-secondary">A fully functional, storefront designed specifically for gaming gear and peripherals.</p>
-          <p class="text-secondary small">Includes user account creation, a dark catalog interface, and a working checkout — connecting a frontend layout directly to a database with PHP sessions for cart persistence.</p>
-          
+          <p class="text-secondary">A fully functional, storefront designed specifically for gaming gear and
+            peripherals.</p>
+          <p class="text-secondary small">Includes user account creation, a dark catalog interface, and a working
+            checkout — connecting a frontend layout directly to a database with PHP sessions for cart persistence.</p>
+
           <div class="role-section">
             <p class="role-title">// My Role</p>
             <ul class="role-list">
@@ -662,7 +781,8 @@
 
           <div class="related-bar">
             <p class="small text-white mb-2">// Related Project Modules:</p>
-            <button class="btn btn-sm btn-outline-info" onclick="switchPanel('panel-ecommerce', 'panel-pinoytix')">PinoyTix App Module</button>
+            <button class="btn btn-sm btn-outline-info"
+              onclick="switchPanel('panel-ecommerce', 'panel-pinoytix')">PinoyTix App Module</button>
           </div>
         </div>
       </div>
@@ -671,8 +791,10 @@
     <div id="panel-portfolio" class="info-panel">
       <div class="panel-content v-bracket-card">
         <div class="panel-back-row">
-          <button class="panel-back-btn" onclick="closePanel('panel-portfolio')"><i class="bi bi-caret-left"></i> Back to Projects</button>
-          <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-portfolio')">Return to About Me</button>
+          <button class="panel-back-btn" onclick="closePanel('panel-portfolio')"><i class="bi bi-caret-left"></i> Back
+            to Projects</button>
+          <button class="panel-back-btn text-white" onclick="closePanelAndGoHome('panel-portfolio')">Return to About
+            Me</button>
         </div>
         <div class="scrollable-panel-body">
           <div class="panel-header-block">
@@ -680,9 +802,11 @@
             <span class="panel-status-badge">Personal Project</span>
           </div>
           <h2 class="text-white mb-3">Personal Portfolio Base</h2>
-          <p class="text-secondary">Designed and built this portfolio architecture to cleanly display student projects and structured design milestones.</p>
-          <p class="text-secondary small">In this environment, it highlights coding projects, academic timelines, and community milestones smoothly inside an interface container.</p>
-          
+          <p class="text-secondary">Designed and built this portfolio architecture to cleanly display student projects
+            and structured design milestones.</p>
+          <p class="text-secondary small">In this environment, it highlights coding projects, academic timelines, and
+            community milestones smoothly inside an interface container.</p>
+
           <div class="role-section">
             <p class="role-title">// My Role</p>
             <ul class="role-list">
@@ -701,7 +825,9 @@
       </div>
     </div>
 
-  </div> <script src="assets/script.js"></script>
+  </div>
+  <script src="assets/script.js"></script>
 
 </body>
+
 </html>
