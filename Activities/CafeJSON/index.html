@@ -8,7 +8,7 @@
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-
+  <link rel="icon" type="image/png" href="images/cup.png">
   <style>
     :root {
       --header-bg: #3b2a20;
@@ -59,6 +59,20 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       opacity: 0.8;
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--line);
+      text-align: center;
+      padding: 1.75rem 1rem;
+      font-size: 0.85rem;
+      color: var(--text-soft);
+    }
+
+    .site-footer .footer-brand {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: var(--text);
     }
 
     /* Section titles */
@@ -229,17 +243,24 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>This page is inspired by Goodblends. You can check out their page on Facebook below.</p>
+          <p>SweetPour was created as a cozy web activity dedicated to slow mornings, warm brews, and simple design.
+            Also this is inspired by Goodblends, a place where coffee lovers can find their perfect cup. Thank you for
+            dropping by! </p>
         </div>
         <div class="modal-footer">
-          <a id="goodblendsLink" class="btn btn-fb" href="https://www.facebook.com/profile.php?id=61582763597805" target="_blank"
-            rel="noopener noreferrer">Visit Goodblends on Facebook</a>
+          <a id="goodblendsLink" class="btn btn-fb" href="https://www.facebook.com/profile.php?id=61582763597805"
+            target="_blank" rel="noopener noreferrer">Visit Goodblends on Facebook</a>
         </div>
       </div>
     </div>
   </div>
 
   <div class="container pb-5" style="max-width: 960px;" id="parent"></div>
+
+  <footer class="site-footer">
+    <div class="footer-brand">SweetPour</div>
+    <div>Inspired by Goodblends.</div>
+  </footer>
 
   <script>
     var menu = [
@@ -257,7 +278,7 @@
         price: 135,
         description: "Steeped for 18 hours, finished with a drizzle of honey.",
         sizes: ["16oz"],
-        image: "images/honey-cold-brew.jpg"
+        image: "images/honey cold brew.jpg"
       },
       {
         name: "Caramel Macchiato",
@@ -265,7 +286,7 @@
         price: 160,
         description: "Vanilla milk, espresso on top, caramel to finish.",
         sizes: ["12oz", "16oz"],
-        image: "images/caramel-macchiato.jpg"
+        image: "images/caramelmach.jpg"
       },
       {
         name: "Flat White",
@@ -273,7 +294,7 @@
         price: 130,
         description: "Double shot with velvety steamed milk.",
         sizes: ["8oz"],
-        image: "images/flat-white.jpg"
+        image: "images/flatw.jpg"
       },
       {
         name: "Kapeng Barako",
@@ -281,7 +302,7 @@
         price: 90,
         description: "Strong local barako, served black or with milk.",
         sizes: ["12oz"],
-        image: "images/kapeng-barako.jpg"
+        image: "images/kape.jpg"
       },
       {
         name: "Butter Croissant",
@@ -289,7 +310,7 @@
         price: 85,
         description: "Flaky, golden and baked fresh every morning.",
         sizes: ["1 pc"],
-        image: "images/croissant.jpg"
+        image: "images/butter.jpg"
       },
       {
         name: "Cinnamon Roll",
@@ -297,15 +318,23 @@
         price: 110,
         description: "Soft roll swirled with cinnamon and cream cheese glaze.",
         sizes: ["1 pc"],
-        image: "images/cinnamon-roll.jpg"
+        image: "images/cinn.jpg"
       },
       {
         name: "Blueberry Muffin",
         category: "Pastries",
         price: 95,
         description: "Moist muffin packed with blueberries.",
-        sizes: ["1 pc"],
-        image: "images/blueberry-muffin.jpg"
+        sizes: ["3 pcs"],
+        image: "images/blu.jpg"
+      },
+      {
+        name: "Chocolate Chip Cookie",
+        category: "Pastries",
+        price: 75,
+        description: "Chewy cookie loaded with chocolate chips.",
+        sizes: ["2 pcs"],
+        image: "images/cuki.jpg"
       },
       {
         name: "Matcha Latte",
@@ -313,7 +342,7 @@
         price: 150,
         description: "Ceremonial matcha whisked with milk.",
         sizes: ["12oz", "16oz"],
-        image: "images/matcha-latte.jpg"
+        image: "images/match.jpg"
       },
       {
         name: "Hot Chocolate",
@@ -321,7 +350,7 @@
         price: 120,
         description: "Thick cocoa with steamed milk.",
         sizes: ["12oz", "16oz"],
-        image: "images/hot-chocolate.jpg"
+        image: "images/choc.jpg"
       },
       {
         name: "Red Iced Tea",
@@ -329,7 +358,7 @@
         price: 125,
         description: "Ice cold red iced tea with a hint of lemon.",
         sizes: ["12oz"],
-        image: "images/red-iced-tea.jpg"
+        image: "images/tea.jpg"
       },
       {
         name: "Milo Monster",
@@ -337,7 +366,7 @@
         price: 95,
         description: "Refreshing sweet milo that boosts up your day.",
         sizes: ["16oz"],
-        image: "images/milo-monster.jpg"
+        image: "images/milo.jpg"
       }
 
     ];
