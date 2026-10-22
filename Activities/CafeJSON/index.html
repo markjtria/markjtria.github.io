@@ -6,21 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SweetPour</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
   <style>
     :root {
-      --header-bg: #3b2a20;          
-      --header-bg-2: #4a362a;        
-      --header-text: #f8f3ea;        
-      --page-bg: #f6efe4;          
-      --card-bg: #fffaf2;           
-      --text: #2f221b;              
-      --text-soft: #7a6759;        
-      --accent: #b9772e;            
-      --price: #9a5b17;             
-      --line: #e6d9c5;           
-      --image-bg: #ecdfcb;      
+      --header-bg: #3b2a20;
+      --header-bg-2: #4a362a;
+      --header-text: #f8f3ea;
+      --page-bg: #f6efe4;
+      --card-bg: #fffaf2;
+      --text: #2f221b;
+      --text-soft: #7a6759;
+      --accent: #b9772e;
+      --price: #9a5b17;
+      --line: #e6d9c5;
+      --image-bg: #ecdfcb;
     }
 
     body {
@@ -167,6 +168,48 @@
       font-weight: 700;
     }
 
+    .btn-about {
+      margin-top: 1.5rem;
+      background: transparent;
+      color: var(--header-text);
+      border: 1px solid var(--header-text);
+      border-radius: 999px;
+      padding: 0.45rem 1.5rem;
+      font: inherit;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .about-modal .modal-content {
+      background: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 1rem;
+      color: var(--text);
+    }
+
+    .about-modal .modal-header,
+    .about-modal .modal-footer {
+      border-color: var(--line);
+    }
+
+    .about-modal .modal-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 700;
+    }
+
+    .about-modal .modal-body p {
+      color: var(--text-soft);
+      margin: 0;
+    }
+
+    .btn-fb {
+      background: var(--header-bg);
+      border-color: var(--header-bg);
+      color: var(--header-text);
+      border-radius: 999px;
+      padding: 0.45rem 1.4rem;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 
@@ -175,7 +218,26 @@
   <header class="site-header">
     <h1 class="brand">SweetPour</h1>
     <p>Coffee, poured slowly.</p>
+    <button type="button" class="btn-about" data-bs-toggle="modal" data-bs-target="#aboutModal">About Me</button>
   </header>
+  <div class="modal fade about-modal" id="aboutModal" tabindex="-1" aria-labelledby="aboutModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title fs-4" id="aboutModalLabel">About Me</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>This page is inspired by Goodblends. You can check out their page on Facebook below.</p>
+        </div>
+        <div class="modal-footer">
+          <a id="goodblendsLink" class="btn btn-fb" href="https://www.facebook.com/profile.php?id=61582763597805" target="_blank"
+            rel="noopener noreferrer">Visit Goodblends on Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="container pb-5" style="max-width: 960px;" id="parent"></div>
 
@@ -262,13 +324,22 @@
         image: "images/hot-chocolate.jpg"
       },
       {
-        name: "Chai Latte",
+        name: "Red Iced Tea",
         category: "Non-coffee",
         price: 125,
-        description: "Spiced black tea with steamed milk.",
+        description: "Ice cold red iced tea with a hint of lemon.",
         sizes: ["12oz"],
-        image: "images/chai-latte.jpg"
+        image: "images/red-iced-tea.jpg"
+      },
+      {
+        name: "Milo Monster",
+        category: "Non-coffee",
+        price: 95,
+        description: "Refreshing sweet milo that boosts up your day.",
+        sizes: ["16oz"],
+        image: "images/milo-monster.jpg"
       }
+
     ];
 
     var categories = ["Coffee", "Pastries", "Non-coffee"];
@@ -311,7 +382,9 @@
     }
   </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
